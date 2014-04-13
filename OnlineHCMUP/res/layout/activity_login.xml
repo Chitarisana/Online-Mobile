@@ -1,0 +1,115 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    tools:context=".LoginActivity" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_gradient" >
+
+        <!-- Header Starts -->
+
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:drawableLeft="@drawable/ic_logo"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:typeface="serif" />
+
+        <!-- Header Ends -->
+
+
+        <!-- Footer Start -->
+
+
+        <!-- Footer Ends -->
+
+
+        <!-- Login Form -->
+
+        <TextView
+            android:id="@+id/lblusername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/header"
+            android:layout_marginLeft="30dp"
+            android:padding="10dp"
+            android:text="@string/login_username"
+            android:textColor="#fff"
+            android:typeface="serif" />
+
+        <EditText
+            android:id="@+id/txtUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/lblusername"
+            android:layout_below="@id/header"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="30dp"
+            android:layout_toRightOf="@id/lblusername"
+            android:background="@drawable/login_edittext_bg"
+            android:gravity="fill_horizontal"
+            android:inputType="text"            
+            android:singleLine="true"
+            android:textColor="#aaa"
+            android:typeface="serif" >
+        </EditText>
+
+        <TextView
+            android:id="@+id/lblpassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/lblusername"
+            android:layout_below="@id/txtUsername"
+            android:layout_marginLeft="30dp"
+            android:padding="10dp"
+            android:text="@string/login_password"
+            android:textColor="#fff"
+            android:typeface="serif" />
+
+        <EditText
+            android:id="@+id/txtPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/lblpassword"
+            android:layout_below="@id/txtUsername"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="30dp"
+            android:layout_toRightOf="@id/lblpassword"
+            android:background="@drawable/login_edittext_bg"
+            android:gravity="fill_horizontal"
+            android:inputType="textPassword"            
+            android:singleLine="true"
+            android:textColor="#aaa"
+            android:typeface="serif" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblpassword"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="30dp"
+            android:background="@drawable/login_button_bg"           
+            android:text="@string/login"
+            android:textColor="#fff"
+            android:typeface="serif" />
+
+        <!-- Login Form Ends -->
+    </RelativeLayout>
+
+</ScrollView>

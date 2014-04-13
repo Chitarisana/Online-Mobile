@@ -1,0 +1,16 @@
+eclipse.preferences.version=1
+encoding//src/com/android/onlinehcmup/Adapter/MenuAdapter.java=UTF-8
+encoding//src/com/android/onlinehcmup/JSON/Connect.java=UTF-8
+encoding//src/com/android/onlinehcmup/JSON/DownloadTask.java=UTF-8
+encoding//src/com/android/onlinehcmup/JSON/Key.java=UTF-8
+encoding//src/com/android/onlinehcmup/LoginActivity.java=UTF-8
+encoding//src/com/android/onlinehcmup/MainActivity.java=UTF-8
+encoding//src/com/android/onlinehcmup/MarkFragment.java=UTF-8
+encoding//src/com/android/onlinehcmup/Model/TermStudy.java=UTF-8
+encoding//src/com/android/onlinehcmup/PrivateMainActivity.java=UTF-8
+encoding//src/com/android/onlinehcmup/PrivateNewsFragment.java=UTF-8
+encoding//src/com/android/onlinehcmup/RegisterCurriculumFragment.java=UTF-8
+encoding//src/com/android/onlinehcmup/ScheduleFragment.java=UTF-8
+encoding//src/com/android/onlinehcmup/StudentEditInfoFragment.java=UTF-8
+encoding//src/com/android/onlinehcmup/StudentInfoFragment.java=UTF-8
+encoding//src/com/android/onlinehcmup/StudyProgramFragment.java=UTF-8

@@ -1,0 +1,68 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/curriculum_selector"
+    android:clickable="true"
+    android:orientation="horizontal" >
+
+    <!-- Title Of News -->
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="#0000ff"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:typeface="serif" />
+    <!-- Date -->
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/title"
+        android:layout_below="@id/title"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="5dp"
+        android:textColor="#231f20"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+    <!-- Details -->
+
+    <TextView
+        android:id="@+id/shortdetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/title"
+        android:layout_below="@+id/date"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="5dp"
+        
+        android:drawablePadding="5dp"
+        android:ellipsize="end"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:maxLines="3"
+        android:paddingBottom="10dp"
+        android:textColor="#000"
+        android:textSize="12sp"
+        android:typeface="serif" />
+
+    <!-- Rightend Arrow -->
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="10dp"
+        android:contentDescription="@string/arrow_right"
+        android:src="@drawable/ic_arrow_right" />
+
+</RelativeLayout>

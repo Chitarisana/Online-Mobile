@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/action_login"   
+        android:icon="@drawable/ic_login"                        
+        android:title="@string/action_login"        
+        android:showAsAction="always|withText"/>    
+</menu>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="btnInfoColor">#AAAAAA</color>
+    <color name="btnCourseColor">#027FFF</color>
+    <color name="btnContactColor">#C40203</color>
+    <color name="hoverColor">#45a0f4</color>
+    <color name="markHoverColor">#d9d9d9</color>
+    <color name="titleRegisterColor">#ebd229</color>
+    <color name="titleDisaccColor">#444b53</color>
+    <color name="titleScheduleColor">#ffae00</color>
+
+    <string name="app_name">Online HCMUP</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- Menu -->
+    <string name="arrow_right">Xem chi tiết</string>
+    <string name="action_login">Đăng nhập</string>
+    <string name="menu_main_public">Trang chủ</string>
+    <string name="menu_main_private">Trang của bạn</string>
+    <string name="menu_1">Thông tin cá nhân</string>
+    <string name="menu_2">Chương trình đào tạo</string>
+    <string name="menu_3">Đăng ký học phần</string>
+    <string name="menu_4">Thời khóa biểu - Lịch thi</string>
+    <string name="menu_4_1">Thời khóa biểu</string>
+    <string name="menu_4_2">Lịch thi</string>
+    <string name="menu_5">Xem điểm</string>
+    <string name="menu_5_1">Xem điểm tích lũy</string>
+    <string name="menu_6">Ý kiến - Thảo luận</string>
+    <string name="menu_7">Tài khoản sinh viên</string>
+    <string name="menu_8">Ghi danh môn tự chọn</string>
+    <string name="menu_9">Đăng ký xét tốt nghiệp</string>
+    <string name="menu_10">Hướng dẫn sử dụng</string>
+    <string name="menu_11">Thoát</string>
+
+    <string-array name="menu_array">
+        <item>@string/menu_main_private</item>
+        <item>@string/menu_1</item>
+        <item>@string/menu_2</item>
+        <item>@string/menu_3</item>
+        <item>@string/menu_4</item>
+        <item>@string/menu_5</item>
+        <item>@string/menu_6</item>
+        <item>@string/menu_7</item>
+        <item>@string/menu_8</item>
+        <item>@string/menu_9</item>
+        <item>@string/menu_10</item>
+        <item>@string/menu_11</item>
+    </string-array>
+    <string-array name="menu_icon">
+        <item>@drawable/ic_menu_1</item>
+        <item>@drawable/ic_menu_2</item>
+        <item>@drawable/ic_menu_3</item>
+        <item>@drawable/ic_menu_4</item>
+        <item>@drawable/ic_menu_5</item>
+        <item>@drawable/ic_menu_6</item>
+        <item>@drawable/ic_menu_7</item>
+        <item>@drawable/ic_menu_8</item>
+        <item>@drawable/ic_menu_9</item>
+        <item>@drawable/ic_menu_10</item>
+        <item>@drawable/ic_menu_11</item>
+        <item>@drawable/ic_menu_12</item>
+    </string-array>
+
+    <!-- Key Student Info -->
+    <string name="key_info_title">Thông tin sinh viên</string>
+    <!--
+    <string name="key_info_1">Mã số SV</string>
+    <string name="key_info_2">Tên đầy đủ</string>
+    <string name="key_info_3">Ngày sinh</string>
+    <string name="key_info_4">Nơi sinh</string>
+    <string name="key_info_5">Giới tính</string>
+    <string name="key_info_6">Dân tộc</string>
+    <string name="key_info_7">Tôn giáo</string>
+    <string name="key_info_8">Số CMND</string>
+    <string name="key_info_9">Khu vực</string>
+    <string name="key_info_10">Tỉnh</string>
+    <string name="key_info_11">Thành phố</string>
+    <string name="key_info_12">Quốc gia</string>
+    <string name="key_info_13">Địa chỉ thường trú</string>
+
+    <string-array name="key_student_info">
+        <item>@string/key_info_1</item>
+        <item>@string/key_info_2</item>
+        <item>@string/key_info_3</item>
+        <item>@string/key_info_4</item>
+        <item>@string/key_info_5</item>
+        <item>@string/key_info_6</item>
+        <item>@string/key_info_7</item>
+        <item>@string/key_info_8</item>
+        <item>@string/key_info_9</item>
+        <item>@string/key_info_10</item>
+        <item>@string/key_info_11</item>
+        <item>@string/key_info_12</item>
+        <item>@string/key_info_13</item>
+    </string-array>
+    -->
+
+
+    <!-- Key Student Course -->
+    <string name="key_course_title">Thông tin khóa học</string>
+    <!--
+    <string name="key_course_1">Khóa học</string>
+    <string name="key_course_2">Niên khóa</string>
+    <string name="key_course_3">Năm nhập học</string>
+    <string name="key_course_4">Năm hết thời gian đào tạo</string>
+    <string name="key_course_5">Chương trình đào tạo</string>
+    <string name="key_course_6">Lớp sinh viên</string>
+    <string name="key_course_7">Chức vụ</string>
+    <string name="key_course_8">Tên cố vấn học tập</string>
+    <string name="key_course_9">ĐT cố vấn học tập</string>
+    <string name="key_course_10">Email cố vấn học tập</string>
+
+    <string-array name="key_student_course">
+        <item>@string/key_course_1</item>
+        <item>@string/key_course_2</item>
+        <item>@string/key_course_3</item>
+        <item>@string/key_course_4</item>
+        <item>@string/key_course_5</item>
+        <item>@string/key_course_6</item>
+        <item>@string/key_course_7</item>
+        <item>@string/key_course_8</item>
+        <item>@string/key_course_9</item>
+        <item>@string/key_course_10</item>
+    </string-array>
+    -->
+
+
+    <!-- Key Student Contact -->
+    <string name="key_contact_1_title">Thông tin liên lạc của sinh viên</string>
+    <!--
+    <string name="key_contact_1_1">Điện thoại</string>
+    <string name="key_contact_1_2">Di động</string>
+    <string name="key_contact_1_3">Email</string>
+    <string name="key_contact_1_4">Địa chỉ</string>
+    <string name="key_contact_1_5">Ghi chú</string>
+
+    <string-array name="key_student_contact_1">
+        <item>@string/key_contact_1_1</item>
+        <item>@string/key_contact_1_2</item>
+        <item>@string/key_contact_1_3</item>
+        <item>@string/key_contact_1_4</item>
+        <item>@string/key_contact_1_5</item>
+    </string-array>
+    -->
+
+    <string name="key_contact_2_title">Thông tin liên lạc người thân của sinh viên</string>
+    <!--
+    <string name="key_contact_2_1">Họ tên</string>
+    <string name="key_contact_2_2">Điện thoại</string>
+    <string name="key_contact_2_3">Địa chỉ</string>
+    -->
+
+
+    <!--
+    <string-array name="key_student_contact_2">
+        <item>@string/key_contact_2_1</item>
+        <item>@string/key_contact_2_2</item>
+        <item>@string/key_contact_2_3</item>
+    </string-array>
+    -->
+    <string name="key_contact_3_title">Số điện thoại nhận tin nhắn</string>
+    <string name="key_contact_title">Thông tin liên lạc</string>
+
+    <!--
+    <string-array name="key_student">
+        <item>@array/key_student_info</item>
+        <item>@array/key_student_course</item>
+        <item>@array/key_student_contact_1</item>
+        <item>@array/key_student_contact_2</item>
+    </string-array>
+    -->
+
+    <string name="error_server">Không thể phân giải IP của server!</string>
+    <string name="error_connect">Không có kết nối!</string>
+    <string name="login_username">Tên đăng nhập</string>
+    <string name="login_password">Mật khẩu</string>
+    <string name="login">Đăng nhập</string>
+    <string name="login_fail_noti_title">Đăng nhập thất bại..</string>
+    <string name="login_fail_noti_detail1">Mật khẩu truy cập không chính xác.</string>
+    <string name="login_fail_noti_detail2">Tên đăng nhập không tồn tại.</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="public_news_details">Thông báo mới</string>
+    <string name="private_news_details">Tin nhắn</string>
+    <string name="profile">Hình ảnh</string>
+    <string name="btn_change_password">Đổi mật khẩu</string>
+    <string name="btn_edit">Sửa thông tin</string>
+    <string name="student_change_password_title">Đổi mật khẩu</string>
+    <string name="old_password">Mật khẩu cũ</string>
+    <string name="new_password">Mật khẩu mới</string>
+    <string name="retype_new_password">Nhập lại mật khẩu mới</string>
+    <string name="edit_password_noti_null">Mật khẩu không được để trống.</string>
+    <string name="edit_password_noti_wrong_old">Mật khẩu cũ không đúng.</string>
+    <string name="edit_password_noti_dismatch">Mật khẩu mới và mật khẩu nhập lại không trùng.</string>
+    <string name="edit_password_noti_success">Đổi mật khẩu thành công.</string>
+    <string name="student_edit_info_title">Sửa thông tin liên lạc</string>
+    <string name="student_edit_info_success">Sửa thành công.</string>
+    <string name="study_program_credit">Số tc</string>
+    <string name="study_program_title">Kế hoạch đào tạo tổng thể</string>
+    <string name="study_program_term_title">Danh sách các học phần</string>
+    <string name="help_title">Chọn một học phần để xem chi tiết</string>
+    <string name="register_curriculum_result">Kết quả đăng ký</string>
+    <string name="menu_view_details">Xem chi tiết</string>
+    <string name="menu_view_current">Xem hiện tại</string>
+    <string name="register_curriculum_result_registered">Các học phần đã đăng ký</string>
+    <string name="register_curriculum_result_current">Các học phần hiện tại</string>
+    <string name="register_curriculum_disaccumulate">Các học phần chưa tích lũy</string>
+    <string name="register_curriculum_register">Đăng ký học phần</string>
+    <string name="menu_view_exam">Xem lịch thi</string>
+    <string name="menu_choose_term">Chọn học kỳ</string>
+    <string name="mark4">Thang điểm 4</string>
+    <string name="logout_noti_title">Đăng xuất</string>
+    <string name="logout_noti_detail">Thoát khỏi tài khoản?</string>
+    <string name="logout_noti_negative">Quay lại</string>
+    <string name="btn_ok">Đồng ý</string>
+    <string name="btn_cancel">Hủy bỏ</string>
+    <string name="noti_loading">Đang tải dữ liệu..</string>
+    <string name="noti_null">Không có thông tin.</string>
+
+</resources>

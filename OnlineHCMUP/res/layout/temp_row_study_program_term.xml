@@ -1,0 +1,12 @@
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/curriID"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"    
+    android:gravity="center_vertical"
+    android:paddingBottom="10dp"
+    android:paddingLeft="15dp"
+    android:paddingTop="10dp"
+    android:singleLine="true"
+    android:textColor="#0c4775"
+    android:textStyle="bold"
+    android:typeface="serif" />

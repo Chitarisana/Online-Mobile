@@ -1,0 +1,13 @@
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:drawableRight="@drawable/ic_arrow_right"
+    android:gravity="center_vertical"
+    android:paddingBottom="5dp"
+    android:paddingLeft="15dp"
+    android:paddingTop="5dp"
+    android:singleLine="true"
+    android:textColor="#0c4775"
+    android:textStyle="bold"
+    android:typeface="serif" />

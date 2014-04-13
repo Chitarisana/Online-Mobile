@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/btnResult"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:layout_weight="0.3"
+        android:background="@drawable/register_btn_0"
+        android:text="@string/register_curriculum_result"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
+    <Button
+        android:id="@+id/btnDisaccumulate"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:layout_weight="0.3"
+        android:background="@drawable/register_btn_1"
+        android:text="@string/register_curriculum_disaccumulate"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:layout_weight="0.3"
+        android:background="@drawable/register_btn_2"
+        android:text="@string/register_curriculum_register"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
+</LinearLayout>
