@@ -1,63 +1,76 @@
 package com.android.onlinehcmup;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Locale;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.PopupWindow;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.onlinehcmup.Adapter.KeyValueAdapter;
 import com.android.onlinehcmup.Adapter.MenuAdapter;
-import com.android.onlinehcmup.Model.Curriculum;
+import com.android.onlinehcmup.JSON.Connect;
+import com.android.onlinehcmup.JSON.LocalTask;
 import com.android.onlinehcmup.Model.JSONType;
+import com.android.onlinehcmup.Model.ScheduleCalendar;
+import com.android.onlinehcmup.Model.ScheduleExamination;
+import com.android.onlinehcmup.Model.TermSchedule;
 import com.android.onlinehcmup.Support.DialogManager;
 import com.android.onlinehcmup.Support.SessionManager;
-import com.android.onlinehcmup.Support.StaticTAG;
 
 public class ScheduleFragment extends BaseFragment {
-	public static int schedulePosition;
-	public SessionManager session;
+	static Activity activity;
+
+	static LinearLayout content;
+	static Spinner spnYear;
+	static TextView date;
+	static String dateString;
+	public static ArrayList<ScheduleCalendar> scheduleCalendar;
+	public static ArrayList<TermSchedule> TermYears;
+	public static String startDate, endDate;
 
 	public ScheduleFragment() {
 	}
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.schedule, menu);
+		inflater.inflate(R.menu.main, menu);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.action_view_exam:
-			if (!MenuAdapter.menuLV.isShown()) {
-				// navigate to fragment view exam
-				// MenuAdapter.mainLayout.closeDrawer(MenuAdapter.menuLV);
-				getFragmentManager()
-						.beginTransaction()
-						.replace(R.id.content, new ExaminateFragment(),
-								StaticTAG.TAG_SCHEDULE_EXAMINATE)
-						.addToBackStack(null).commit();
-			} else {
-				MenuAdapter.menuLV.setItemChecked(schedulePosition, true);
-				MenuAdapter.mainLayout.closeDrawer(MenuAdapter.menuLV);
-			}
-			return true;
+		/*
+		 * case R.id.action_view_exam: if (!MenuAdapter.menuLV.isShown()) {
+		 * getFragmentManager() .beginTransaction() .replace(R.id.content, new
+		 * ExaminationFragment(), StaticTAG.TAG_SCHEDULE_EXAMINATE)
+		 * .addToBackStack(null).commit(); } else {
+		 * MenuAdapter.mainLayout.closeDrawer(MenuAdapter.menuLV); } return
+		 * true;
+		 */
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -66,81 +79,148 @@ public class ScheduleFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		session = new SessionManager(getActivity().getApplicationContext());
+		activity = getActivity();
+		SessionManager session = new SessionManager(activity);
 		session.checkLogin();
+
 		getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActivity().getActionBar().setTitle(
-				getActivity().getResources().getString(R.string.menu_4_1));
+		setTitle(R.string.menu_4_1);
 		setHasOptionsMenu(true);
-		View row = inflater.inflate(R.layout.fragment_registered_current,
-				container, false);
-		TextView studentName = (TextView) row.findViewById(R.id.studentName);
-		studentName.setText("Phạm Thị Ngọc Diệp");
-		TextView studentID = (TextView) row.findViewById(R.id.studentID);
-		studentID.setText("K36.104.013");
-		TextView title = (TextView) row.findViewById(R.id.title);
-		title.setText("Thời khóa biểu hiện tại");
-		title.setBackgroundColor(getActivity().getResources().getColor(
-				R.color.titleScheduleColor));
-		final ListView details = (ListView) row.findViewById(R.id.details);
-		ListView list = (ListView) row.findViewById(R.id.content);
-		final ArrayList<Curriculum> curris = new ArrayList<Curriculum>();
-		curris.add(new Curriculum("MATH1008",
-				"Đại số tuyến tính và Hình học giải tích", "Bắt buộc", 3));
-		curris.add(new Curriculum("MATH1002", "Giải tích 1", "Bắt buộc", 3));
-		curris.add(new Curriculum("POLI1901",
-				"Những nguyên lý cơ bản của chủ nghĩa Mac-Lenin", "Bắt buộc", 2));
-		curris.add(new Curriculum("FLAN1001", "Tiếng Anh học phần 1",
-				"Tự chọn", 4));
-		curris.add(new Curriculum("COMP1001", "Tin học căn bản", "Bắt buộc", 3));
-		curris.add(new Curriculum("COMP1001", "Tin học căn bản", "Bắt buộc", 3));
-		curris.add(new Curriculum("COMP1001", "Tin học căn bản", "Bắt buộc", 3));
-		curris.add(new Curriculum("COMP1001", "Tin học căn bản", "Bắt buộc", 3));
-		curris.add(new Curriculum("COMP1001", "Tin học căn bản", "Bắt buộc", 3));
-		ArrayList<String> curriNames = new ArrayList<String>();
-		for (int i = 0; i < curris.size(); i++) {
-			curriNames.add(curris.get(i).CurriculumID);
-		}
-		list.setItemsCanFocus(true);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-				R.layout.row_registered_current, R.id.curriName, curriNames);
-		list.setAdapter(adapter);
-		DisplayMetrics displaymetrics = new DisplayMetrics();
-		getActivity().getWindowManager().getDefaultDisplay()
-				.getMetrics(displaymetrics);
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-				LayoutParams.MATCH_PARENT,
-				(int) (displaymetrics.heightPixels / 3));
-		list.setLayoutParams(params);
-		list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+		View row = inflater.inflate(R.layout.fragment_schedule, container,
+				false);
+
+		spnYear = (Spinner) row.findViewById(R.id.spnYear);
+
+		date = (TextView) row.findViewById(R.id.date);
+		dateString = "Từ %s đến %s";
+
+		TextView viewCurrent = (TextView) row.findViewById(R.id.viewCurrent);
+		viewCurrent.setOnClickListener(new View.OnClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View v, int position,
-					long arg3) {
-				// get Details of that curriculum
-				ArrayList<JSONType> data = new ArrayList<JSONType>();
-				data.add(new JSONType("Tên học phần",
-						curris.get(position).CurriculumName));
-				data.add(new JSONType("Số tín chỉ", curris.get(position).Credit
-						+ ""));
-				data.add(new JSONType("Ngày học", "Chưa add"));
-				data.add(new JSONType("Giảng viên", "Chưa add"));
-				details.setAdapter(new ScheduleDetailsAdapter(data));
+			public void onClick(View v) {
+				startDate = "";
+				setCalenderDate(0);
 			}
 		});
+
+		ImageView btnLeft = (ImageView) row.findViewById(R.id.btnLeft);
+		ImageView btnRight = (ImageView) row.findViewById(R.id.btnRight);
+		btnLeft.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				setCalenderDate(-Calendar.DAY_OF_WEEK);
+			}
+		});
+		btnRight.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				setCalenderDate(Calendar.DAY_OF_WEEK);
+			}
+		});
+		content = (LinearLayout) row.findViewById(R.id.calendar_content);
+
+		String studentID = session.getStudentID();
+		Connect connect = new Connect(activity);
+		PrivateMainActivity.currentTask = connect
+				.LoadScheduleCalendar(studentID);
 		return row;
 	}
 
-	public class ScheduleDetailsAdapter extends BaseAdapter {
-		private ArrayList<JSONType> data;
+	private static void setCalenderDate(int addNum) {
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy",
+				Locale.getDefault());
+		Calendar cal = Calendar.getInstance();
+		try {
+			if (startDate != "" && startDate != null) {
+				cal.setTime(dateFormat.parse(startDate));
+			}
+			cal.add(Calendar.DAY_OF_WEEK, addNum);
+			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+			startDate = dateFormat.format(cal.getTime());
+			cal.add(Calendar.DAY_OF_WEEK, 6);
+			endDate = dateFormat.format(cal.getTime());
+			LocalTask.ScheduleCalendarContentTask();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
 
-		public ScheduleDetailsAdapter(ArrayList<JSONType> d) {
-			data = d;
+	private static void setSpinner(final Spinner spn, ArrayList<String> list) {
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity,
+				R.layout.row_spinner, R.id.text, list);
+		adapter.setDropDownViewResource(R.layout.row_popup_spinner);
+		spn.setAdapter(adapter);
+		spn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
+				startDate = LocalTask.GetStartDate(
+						TermYears.get(position).YearStudy,
+						TermYears.get(position).TermID);
+				setCalenderDate(0);
+				LocalTask.ScheduleCalendarContentTask();
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+			}
+		});
+	}
+
+	public static void LoadFragment() {
+		if (TermYears == null) {
+			Toast.makeText(activity, R.string.noti_null, Toast.LENGTH_SHORT)
+					.show();
+			return;
+		}
+		ArrayList<String> list = new ArrayList<String>();
+		for (int i = 0; i < TermYears.size(); i++) {
+			list.add(TermYears.get(i).GetName());
+		}
+		setSpinner(spnYear, list);
+	}
+
+	public static void LoadContentCalendar() {
+		if (scheduleCalendar == null) {
+			Toast.makeText(activity, R.string.noti_null, Toast.LENGTH_SHORT)
+					.show();
+			return;
+		}
+		date.setText(String.format(dateString, startDate, endDate));
+		CalendarContentAdapter adapter = new CalendarContentAdapter();
+		int adapterCount = adapter.getCount();
+		content.removeAllViews();
+		for (int i = 0; i < adapterCount; i++) {
+			View item = adapter.getView(i, null, null);
+			content.addView(item);
+		}
+	}
+
+	public static class CalendarContentAdapter extends BaseAdapter {
+		final int periodTotal = 12;
+		final String[] startTime = new String[] { "06h30", "07h20", "08h10",
+				"09h05", "09h55", "10h45", "12h30", "13h20", "14h10", "15h05",
+				"15h55", "16h45" };
+		final int[] dateOfWeek = new int[] { R.id.time_0_1, R.id.time_0_2,
+				R.id.time_0_3, R.id.time_0_4, R.id.time_0_5, R.id.time_0_6,
+				R.id.time_0_7 };
+		final String[] dateOfWeekVi = new String[] { "Thứ 2", "Thứ 3", "Thứ 4",
+				"Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật" };
+		final int[] colors = new int[] { Color.CYAN, Color.BLUE, Color.GRAY,
+				Color.GREEN, Color.MAGENTA, Color.YELLOW, Color.RED,
+				Color.LTGRAY };
+
+		public CalendarContentAdapter() {
 		}
 
 		@Override
 		public int getCount() {
-			return data.size();
+			return periodTotal;
 		}
 
 		@Override
@@ -156,31 +236,63 @@ public class ScheduleFragment extends BaseFragment {
 		@Override
 		public View getView(final int position, View convertView,
 				ViewGroup parent) {
-			View row = (getActivity().getLayoutInflater()).inflate(
-					R.layout.row_study_program_term_details, null);
-			TextView key = (TextView) row.findViewById(R.id.key);
-			TextView value = (TextView) row.findViewById(R.id.value);
+			View row = (activity.getLayoutInflater()).inflate(
+					R.layout.row_content_calendar, null);
+			TextView hour = (TextView) row.findViewById(R.id.time_0);
+			hour.setText((position + 1) + "\n"
+					+ startTime[position].replace("h", ":"));
 
-			key.setText(data.get(position).key);
-			value.setText(data.get(position).value);
+			for (int i = 0; i < 7; i++) {// 7 days
+				for (int j = 0; j < scheduleCalendar.size(); j++) {
+					final ScheduleCalendar calendar = scheduleCalendar.get(j);
+					if (calendar.DayOfWeek.compareTo(dateOfWeekVi[i]) == 0) {
+						int start = Integer.parseInt(calendar.StartPeriod);
+						int end = Integer.parseInt(calendar.EndPeriod);
+						if ((position + 1 <= end && position + 1 >= start)) {
+							TextView text = (TextView) row
+									.findViewById(dateOfWeek[i]);
+							text.setBackgroundColor(colors[j % colors.length]);
+							text.setOnClickListener(new View.OnClickListener() {
 
-			DisplayMetrics displaymetrics = new DisplayMetrics();
-			getActivity().getWindowManager().getDefaultDisplay()
-					.getMetrics(displaymetrics);
-			key.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
-			value.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
-
-			int padding = 60; // total padding
-			value.setWidth(displaymetrics.widthPixels - padding
-					- key.getMeasuredWidth());
+								@Override
+								public void onClick(View v) {
+									ArrayList<JSONType> data = new ArrayList<JSONType>();
+									data.add(new JSONType("Số tín chỉ: ",
+											calendar.GetCredits()));
+									data.add(new JSONType("Ngày học: ",
+											calendar.DayOfWeek + ", Tiết "
+													+ calendar.StartPeriod
+													+ " - "
+													+ calendar.EndPeriod));
+									data.add(new JSONType("Thời gian: ",
+											calendar.BeginTime + " - "
+													+ calendar.EndTime));
+									data.add(new JSONType("Phòng: ",
+											calendar.RoomID));
+									data.add(new JSONType("GV: ", calendar
+											.GetTeacherName()));
+									DialogManager.showPopupDialog(activity,
+											calendar.GetCurriculumName(), data,
+											0, 0, null).show();
+								}
+							});
+						}
+					}
+				}
+			}
 			return row;
 		}
 	}
 
-	public static class ExaminateFragment extends BaseFragment {
-		String titleString="Năm học 2013-2014, học kỳ ";
-		int term=1;
-		TextView title ;
+	public static class ExaminationFragment extends BaseFragment {
+		public static ArrayList<TermSchedule> TermSchedules;
+		public static TermSchedule current;
+		public static ArrayList<ScheduleExamination> ExamCurris;
+		public static ListView examDetails, examList;
+		TextView title;
+		public static TextView help;
+		SessionManager session;
+
 		@Override
 		public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 			inflater.inflate(R.menu.examinate, menu);
@@ -190,30 +302,47 @@ public class ScheduleFragment extends BaseFragment {
 		public boolean onOptionsItemSelected(MenuItem item) {
 			switch (item.getItemId()) {
 			case R.id.action_choose_term:
-
-				final String[] termList = new String[8];
-				for (int i = 0; i < 8; i++)
-					termList[i] = titleString + (i + 1);
-				ListView list = new ListView(getActivity());
-				list.setAdapter(new ArrayAdapter<String>(getActivity(),
-						R.layout.row_popup_list, termList));
-				View parent = (getActivity().getLayoutInflater()).inflate(
-						R.layout.activity_private_main, null);
-				final PopupWindow popup= DialogManager.showListDialog(getActivity(),
-						list, parent);
-
-				list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-					@Override
-					public void onItemClick(AdapterView<?> adapterView, View v,
-							int position, long arg3) {
-						Log.d("position", termList[position] + "");
-						term = position+1;
-						 title.setText(titleString+term);
-						// set content here.....
-						popup.dismiss();
+				if (!MenuAdapter.menuLV.isShown()) {
+					final String[] termList = new String[TermSchedules.size()];
+					for (int i = 0; i < termList.length; i++) {
+						termList[i] = TermSchedules.get(i).GetName();
 					}
-				});
+					ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+							activity, R.layout.row_popup_list, R.id.text,
+							termList);
+					final Dialog dialog = DialogManager.showPopupDialog(
+							activity, getString(R.string.menu_choose_term),
+							adapter, 0, 0, null);
+
+					final ListView list = (ListView) dialog
+							.findViewById(R.id.listview);
+
+					list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+						@Override
+						public void onItemClick(AdapterView<?> adapterView,
+								View v, int position, long arg3) {
+							list.setItemChecked(position, true);
+							title.setText(termList[position]);
+							dialog.dismiss();
+
+							ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+									activity, R.layout.row_registered_current,
+									R.id.curriName, new String[] {});
+							examList.setAdapter(adapter);
+							examDetails.setAdapter(adapter);
+
+							Connect connect = new Connect(activity);
+							PrivateMainActivity.currentTask = connect.LoadScheduleExamination(
+									session.getStudentID(),
+									TermSchedules.get(position).YearStudy,
+									TermSchedules.get(position).TermID);
+						}
+					});
+					dialog.show();
+				} else {
+					MenuAdapter.mainLayout.closeDrawer(MenuAdapter.menuLV);
+				}
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
@@ -223,64 +352,63 @@ public class ScheduleFragment extends BaseFragment {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
+			activity = getActivity();
+			session = new SessionManager(activity);
+			session.checkLogin();
+
 			getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
-			getActivity().getActionBar().setTitle(
-					getActivity().getResources().getString(R.string.menu_4_2));
-			PrivateMainActivity.menuToggle.setDrawerIndicatorEnabled(false);
-			PrivateMainActivity.mainLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+			setTitle(R.string.menu_4_2);
 			setHasOptionsMenu(true);
 
 			View row = inflater.inflate(R.layout.fragment_registered_current,
 					container, false);
-			TextView studentName = (TextView) row
-					.findViewById(R.id.studentName);
-			studentName.setText("Phạm Thị Ngọc Diệp");
-			TextView studentID = (TextView) row.findViewById(R.id.studentID);
-			studentID.setText("K36.104.013");
-			title= (TextView) row.findViewById(R.id.title);
-			title.setText(titleString+term);
-			title.setBackgroundColor(getActivity().getResources().getColor(
-					R.color.titleScheduleColor));
-			TextView help = (TextView) row.findViewById(R.id.help);
-			help.setText("Chọn một học phần để xem lịch thi");
-			final ListView details = (ListView) row.findViewById(R.id.details);
-			ListView list = (ListView) row.findViewById(R.id.content);
-			final ArrayList<Curriculum> curris = new ArrayList<Curriculum>();
-			curris.add(new Curriculum("MATH1008",
-					"Đại số tuyến tính và Hình học giải tích", "Bắt buộc", 3));
-			curris.add(new Curriculum("MATH1002", "Giải tích 1", "Bắt buộc", 3));
-			curris.add(new Curriculum("POLI1901",
-					"Những nguyên lý cơ bản của chủ nghĩa Mac-Lenin",
-					"Bắt buộc", 2));
-			curris.add(new Curriculum("FLAN1001", "Tiếng Anh học phần 1",
-					"Tự chọn", 4));
-			curris.add(new Curriculum("COMP1001", "Tin học căn bản",
-					"Bắt buộc", 3));
-			curris.add(new Curriculum("COMP1001", "Tin học căn bản",
-					"Bắt buộc", 3));
-			curris.add(new Curriculum("COMP1001", "Tin học căn bản",
-					"Bắt buộc", 3));
-			curris.add(new Curriculum("COMP1001", "Tin học căn bản",
-					"Bắt buộc", 3));
-			curris.add(new Curriculum("COMP1001", "Tin học căn bản",
-					"Bắt buộc", 3));
+
+			HashMap<String, String> user = session.getUserDetails();
+			String studentID = user.get(SessionManager.KEY_STUDENT_ID);
+			String studentName = user.get(SessionManager.KEY_STUDENT_NAME);
+			TextView stdName = (TextView) row.findViewById(R.id.studentName);
+			stdName.setText(studentName);
+			TextView stdID = (TextView) row.findViewById(R.id.studentID);
+			stdID.setText(studentID);
+
+			TermSchedules = LocalTask.GetTermSchedule();
+
+			title = (TextView) row.findViewById(R.id.title);
+
+			title.setBackgroundColor(getColor(R.color.titleScheduleColor));
+			help = (TextView) row.findViewById(R.id.help);
+			help.setText(R.string.help_title_exam);
+			examDetails = (ListView) row.findViewById(R.id.details);
+			examList = (ListView) row.findViewById(R.id.content);
+			examList.setItemsCanFocus(true);
+
+			HashMap<String, String> current = session.getCurrentTermYear();
+			String termID = current.get(SessionManager.KEY_TERM_ID);
+			String yearStudy = current.get(SessionManager.KEY_YEAR_STUDY);
+			Connect connect = new Connect(activity);
+			PrivateMainActivity.currentTask = connect.LoadScheduleExamination(
+					studentID, yearStudy, termID);
+			return row;
+		}
+
+		public static void LoadFragment() {
 			ArrayList<String> curriNames = new ArrayList<String>();
-			for (int i = 0; i < curris.size(); i++) {
-				curriNames.add(curris.get(i).CurriculumName);
+			for (int i = 0; i < ExamCurris.size(); i++) {
+				curriNames.add(ExamCurris.get(i).CurriculumName);
 			}
-			list.setItemsCanFocus(true);
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-					getActivity(), R.layout.row_registered_current,
-					R.id.curriName, curriNames);
-			list.setAdapter(adapter);
+
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity,
+					R.layout.row_registered_current, R.id.curriName, curriNames);
+			examList.setAdapter(adapter);
+
 			DisplayMetrics displaymetrics = new DisplayMetrics();
-			getActivity().getWindowManager().getDefaultDisplay()
+			activity.getWindowManager().getDefaultDisplay()
 					.getMetrics(displaymetrics);
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
 					LayoutParams.MATCH_PARENT,
-					(int) (displaymetrics.heightPixels / 3));
-			list.setLayoutParams(params);
-			list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+					(int) (displaymetrics.heightPixels / 5));
+			examList.setLayoutParams(params);
+			examList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View v,
@@ -288,61 +416,20 @@ public class ScheduleFragment extends BaseFragment {
 					// get Details of that curriculum
 					ArrayList<JSONType> data = new ArrayList<JSONType>();
 					data.add(new JSONType("Ngày thi",
-							curris.get(position).CurriculumName));
+							ExamCurris.get(position).Day));
 					data.add(new JSONType("Giờ thi",
-							curris.get(position).Credit + ""));
-					data.add(new JSONType("Địa điểm", "Chưa add"));
-					data.add(new JSONType("Phòng thi", "Chưa add"));
-					details.setAdapter(new ExaminateDetailsAdapter(data));
+							ExamCurris.get(position).Time));
+					data.add(new JSONType("Địa điểm",
+							ExamCurris.get(position).Address));
+					data.add(new JSONType("Phòng thi",
+							ExamCurris.get(position).Room));
+					examDetails.setAdapter(new KeyValueAdapter(activity, data,
+							R.layout.row_study_program_term_details, null));
+					String text = activity.getString(R.string.help_change_exam)
+							+ " " + ExamCurris.get(position).CurriculumName;
+					help.setText(text.trim());
 				}
 			});
-			return row;
-		}
-
-		public class ExaminateDetailsAdapter extends BaseAdapter {
-			private ArrayList<JSONType> data;
-
-			public ExaminateDetailsAdapter(ArrayList<JSONType> d) {
-				data = d;
-			}
-
-			@Override
-			public int getCount() {
-				return data.size();
-			}
-
-			@Override
-			public Object getItem(int position) {
-				return position;
-			}
-
-			@Override
-			public long getItemId(int position) {
-				return position;
-			}
-
-			@Override
-			public View getView(final int position, View convertView,
-					ViewGroup parent) {
-				View row = (getActivity().getLayoutInflater()).inflate(
-						R.layout.row_study_program_term_details, null);
-				TextView key = (TextView) row.findViewById(R.id.key);
-				TextView value = (TextView) row.findViewById(R.id.value);
-
-				key.setText(data.get(position).key);
-				value.setText(data.get(position).value);
-
-				DisplayMetrics displaymetrics = new DisplayMetrics();
-				getActivity().getWindowManager().getDefaultDisplay()
-						.getMetrics(displaymetrics);
-				key.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
-				value.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
-
-				int padding = 60; // total padding
-				value.setWidth(displaymetrics.widthPixels - padding
-						- key.getMeasuredWidth());
-				return row;
-			}
 		}
 	}
 }

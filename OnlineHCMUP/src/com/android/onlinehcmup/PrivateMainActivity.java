@@ -13,10 +13,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+//import android.widget.Toast;
 
 import com.android.onlinehcmup.Adapter.MenuAdapter;
+import com.android.onlinehcmup.JSON.DownloadTask;
 import com.android.onlinehcmup.Model.SliderMenu;
-import com.android.onlinehcmup.Support.DialogManager;
+import com.android.onlinehcmup.SQLite.DatabaseHandler;
 import com.android.onlinehcmup.Support.SessionManager;
 import com.android.onlinehcmup.Support.StaticTAG;
 
@@ -24,13 +26,14 @@ public class PrivateMainActivity extends Activity {
 
 	public static Activity activity;
 	public static DrawerLayout mainLayout;
-	private ListView menuLV;
+	public static DownloadTask currentTask;
 	public static ActionBarDrawerToggle menuToggle;
 	private CharSequence mainTitle;
 	public static CharSequence itemTitle, title;
-	private ArrayList<SliderMenu> sliderMenu;
+	SessionManager session;
+
 	// list of fragment TAG that will pop back when button back pressed.
-	private String[] fragTag = new String[] {
+	private final String[] fragTag = new String[] {
 			StaticTAG.TAG_PRIVATE_NEWS_DETAILS,
 			StaticTAG.TAG_STUDENT_CHANGE_PASSWORD,
 			StaticTAG.TAG_STUDENT_EDIT_INFO,
@@ -38,19 +41,17 @@ public class PrivateMainActivity extends Activity {
 			StaticTAG.TAG_REGISTER_CURRICULUM_RESULT_ALL,
 			StaticTAG.TAG_REGISTER_CURRICULUM_DISACCUMULATED,
 			StaticTAG.TAG_REGISTER_CURRICULUM_REGISTER,
-			StaticTAG.TAG_SCHEDULE_EXAMINATE };
-
-	SessionManager session;
+			/*StaticTAG.TAG_SCHEDULE_EXAMINATE */};
 
 	@Override
-	public void onPause() {
-		super.onPause();
+	public void onStop() {
+		super.onStop();
 		title = getActionBar().getTitle();
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
+	public void onStart() {
+		super.onStart();
 		if (title != null)
 			getActionBar().setTitle(title);
 	}
@@ -59,24 +60,23 @@ public class PrivateMainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_private_main);
-		activity = this;
-		StaticTAG.ACTIVITY = activity;
-		session = new SessionManager(getApplicationContext());
-		session.checkLogin();
-		getActionBar().setDisplayHomeAsUpEnabled(true);
 
-		// add slider bar here
-		mainTitle = getResources().getString(R.string.app_name);
+		activity = this;
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		if (DownloadTask.db == null)
+			DownloadTask.db = new DatabaseHandler(this);
+
+		// add slider bar
+		mainTitle = getString(R.string.app_name);
 		mainLayout = (DrawerLayout) findViewById(R.id.mainLayout);
-		menuLV = (ListView) findViewById(R.id.menu);
+		ListView menuLV = (ListView) findViewById(R.id.menu);
 
 		String[] menuArray = getResources().getStringArray(R.array.menu_array);
 		TypedArray iconArray = getResources().obtainTypedArray(
 				R.array.menu_icon);
-		int menuSize = menuArray.length;
-		sliderMenu = new ArrayList<SliderMenu>();
+		ArrayList<SliderMenu> sliderMenu = new ArrayList<SliderMenu>();
 
-		for (int i = 0; i < menuSize; i++) {
+		for (int i = 0; i < menuArray.length; i++) {
 			sliderMenu.add(new SliderMenu(iconArray.getResourceId(i, -1),
 					menuArray[i]));
 		}
@@ -97,12 +97,13 @@ public class PrivateMainActivity extends Activity {
 			}
 		};
 		mainLayout.setDrawerListener(menuToggle);
-		if (savedInstanceState == null) {
-			getFragmentManager()
-					.beginTransaction()
-					.replace(R.id.content, new PrivateNewsFragment(),
-							StaticTAG.TAG_PRIVATE_NEWS_LIST).commit();
-		}
+
+		// if (savedInstanceState == null) {
+		getFragmentManager()
+				.beginTransaction()
+				.replace(R.id.content, new PrivateNewsFragment(),
+						StaticTAG.TAG_PRIVATE_NEWS_LIST).commit();
+		// }
 	}
 
 	@Override
@@ -159,14 +160,8 @@ public class PrivateMainActivity extends Activity {
 			getActionBar().setTitle(itemTitle);
 			menuToggle.setDrawerIndicatorEnabled(true);
 			mainLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-		} else {
-			DialogManager.showYesNoDialog(PrivateMainActivity.this,
-					getResources().getString(R.string.logout_noti_title),
-					getResources().getString(R.string.logout_noti_detail),
-					getResources().getString(R.string.btn_ok), getResources()
-							.getString(R.string.logout_noti_negative), true);
-			// msg logout user
-		}
+		} else
+			super.onBackPressed();
 	}
 
 	public boolean navBack() {

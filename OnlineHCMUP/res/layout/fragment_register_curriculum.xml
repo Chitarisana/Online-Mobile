@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
+    android:layout_margin="10dp"
     android:orientation="vertical" >
 
     <Button
@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_margin="10dp"
+        android:layout_margin="10dp" android:padding="10dp"
         android:layout_weight="0.3"
         android:background="@drawable/register_btn_0"
         android:text="@string/register_curriculum_result"
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_margin="10dp"
+        android:layout_margin="10dp" android:padding="10dp"
         android:layout_weight="0.3"
         android:background="@drawable/register_btn_1"
         android:text="@string/register_curriculum_disaccumulate"
@@ -37,7 +37,7 @@
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:layout_weight="0.3"
+        android:layout_weight="0.3" android:padding="10dp"
         android:background="@drawable/register_btn_2"
         android:text="@string/register_curriculum_register"
         android:textColor="#fff"

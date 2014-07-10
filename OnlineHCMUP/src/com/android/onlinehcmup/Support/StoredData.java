@@ -24,5 +24,4 @@ public class StoredData {
 		editor.putInt(key, value);
 		editor.commit();
 	}
-	
 }

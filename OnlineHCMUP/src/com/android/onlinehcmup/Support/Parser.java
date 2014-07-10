@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import android.annotation.SuppressLint;
@@ -46,4 +47,22 @@ public class Parser {
 			return null;
 		}
 	}
+
+	public static String TrimSpace(String str) {
+		while (str.contains("  "))
+			str = str.replace("  ", " ");
+		return str;
+	}
+
+	public static String[] MultiToOne(String[][] values) {
+		ArrayList<String> result = new ArrayList<String>();
+		for (int i = 0; i < values.length; i++)
+			for (int j = 0; j < values[i].length; j++)
+				result.add(values[i][j]);
+		return result.toArray(new String[result.size()]);
+	}
+
+	/*public static String toStudyProgramID(String studentID) {
+		return studentID.substring(0, 3) + studentID.substring(4, 7);
+	}*/
 }

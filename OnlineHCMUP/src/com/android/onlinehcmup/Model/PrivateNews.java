@@ -21,4 +21,13 @@ public class PrivateNews {
 		MessageBody = _MessageBody;
 		FileAttach = _FileAttach;
 	}
+
+	public PrivateNews(String... values) {
+		MessageSubject = values[0];
+		CreationDate = values[1];
+		SenderName = values[2];
+		IsRead = values[3];
+		MessageBody = values[4];
+		FileAttach = values[5];
+	}
 }

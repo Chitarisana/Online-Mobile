@@ -6,6 +6,6 @@
     <item android:drawable="@color/hoverColor" android:state_focused="true"/>
     <item android:drawable="@color/hoverColor" android:state_pressed="true"/>
     <!-- Default Item -->
-    <item android:drawable="@android:color/white"/>
+    <item android:drawable="@android:color/transparent"/>
 
 </selector>

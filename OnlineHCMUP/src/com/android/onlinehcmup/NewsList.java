@@ -9,7 +9,6 @@ import android.widget.ListView;
 
 import com.android.onlinehcmup.Adapter.PrivateNewsAdapter;
 import com.android.onlinehcmup.Adapter.PublicNewsAdapter;
-import com.android.onlinehcmup.Support.StaticTAG;
 
 public class NewsList extends BaseFragment {
 	public ListView listView;
@@ -27,7 +26,7 @@ public class NewsList extends BaseFragment {
 		Bundle extras = getArguments();
 		int type = extras.getInt(KEY_TYPE);
 		if (type == KEY_PUBLIC) {
-			listView.setAdapter(new PublicNewsAdapter(StaticTAG.ACTIVITY,
+			listView.setAdapter(new PublicNewsAdapter(MainActivity.activity,
 					MainActivity.data));
 		} else {
 			listView.setAdapter(new PrivateNewsAdapter(

@@ -9,6 +9,12 @@ package com.android.onlinehcmup;
 
 public final class R {
     public static final class array {
+        /** 
+        <item>@string/menu_9</item>
+        <item>@string/menu_10</item>
+        <item>@string/menu_11</item>
+        
+         */
         public static final int menu_array=0x7f070000;
         public static final int menu_icon=0x7f070001;
     }
@@ -47,102 +53,113 @@ public final class R {
         public static final int btn_cab_done_pressed_onlinehcmup=0x7f020009;
         public static final int cab_background_bottom_onlinehcmup=0x7f02000a;
         public static final int cab_background_top_onlinehcmup=0x7f02000b;
-        public static final int curriculum_selector=0x7f02000c;
-        public static final int editinfo_edittext_bg=0x7f02000d;
-        public static final int ic_arrow=0x7f02000e;
-        public static final int ic_arrow_right=0x7f02000f;
-        public static final int ic_back=0x7f020010;
-        public static final int ic_fail=0x7f020011;
-        public static final int ic_info=0x7f020012;
-        public static final int ic_launcher=0x7f020013;
-        public static final int ic_login=0x7f020014;
-        public static final int ic_logo=0x7f020015;
-        public static final int ic_menu=0x7f020016;
-        public static final int ic_menu_1=0x7f020017;
-        public static final int ic_menu_10=0x7f020018;
-        public static final int ic_menu_11=0x7f020019;
-        public static final int ic_menu_12=0x7f02001a;
-        public static final int ic_menu_2=0x7f02001b;
-        public static final int ic_menu_3=0x7f02001c;
-        public static final int ic_menu_4=0x7f02001d;
-        public static final int ic_menu_5=0x7f02001e;
-        public static final int ic_menu_6=0x7f02001f;
-        public static final int ic_menu_7=0x7f020020;
-        public static final int ic_menu_8=0x7f020021;
-        public static final int ic_menu_9=0x7f020022;
-        public static final int ic_profile=0x7f020023;
-        public static final int ic_signout=0x7f020024;
-        public static final int ic_success=0x7f020025;
-        public static final int image_bg=0x7f020026;
-        public static final int list_focused_onlinehcmup=0x7f020027;
-        public static final int list_pressed_onlinehcmup=0x7f020028;
-        public static final int list_selector=0x7f020029;
-        public static final int listview_bg=0x7f02002a;
-        public static final int listview_bg_hover=0x7f02002b;
-        public static final int login_button_bg=0x7f02002c;
-        public static final int login_edittext_bg=0x7f02002d;
-        public static final int login_gradient=0x7f02002e;
-        public static final int menu_dropdown_panel_onlinehcmup=0x7f02002f;
-        public static final int popup_bg=0x7f020030;
-        public static final int popup_bg_hover=0x7f020031;
-        public static final int popup_selector=0x7f020032;
-        public static final int progress_bg_onlinehcmup=0x7f020033;
-        public static final int progress_horizontal_onlinehcmup=0x7f020034;
-        public static final int progress_primary_onlinehcmup=0x7f020035;
-        public static final int progress_secondary_onlinehcmup=0x7f020036;
-        public static final int register_btn_0=0x7f020037;
-        public static final int register_btn_1=0x7f020038;
-        public static final int register_btn_2=0x7f020039;
-        public static final int selectable_background_onlinehcmup=0x7f02003a;
-        public static final int shadow=0x7f02003b;
-        public static final int spinner_ab_default_onlinehcmup=0x7f02003c;
-        public static final int spinner_ab_disabled_onlinehcmup=0x7f02003d;
-        public static final int spinner_ab_focused_onlinehcmup=0x7f02003e;
-        public static final int spinner_ab_pressed_onlinehcmup=0x7f02003f;
-        public static final int spinner_background_ab_onlinehcmup=0x7f020040;
-        public static final int tab_indicator_ab_onlinehcmup=0x7f020041;
-        public static final int tab_selected_focused_onlinehcmup=0x7f020042;
-        public static final int tab_selected_onlinehcmup=0x7f020043;
-        public static final int tab_selected_pressed_onlinehcmup=0x7f020044;
-        public static final int tab_unselected_focused_onlinehcmup=0x7f020045;
-        public static final int tab_unselected_onlinehcmup=0x7f020046;
-        public static final int tab_unselected_pressed_onlinehcmup=0x7f020047;
+        public static final int calendar_content_bg=0x7f02000c;
+        public static final int calendar_content_period_bg=0x7f02000d;
+        public static final int calendar_divider=0x7f02000e;
+        public static final int calendar_divider_gray=0x7f02000f;
+        public static final int calendar_period=0x7f020010;
+        public static final int calendar_title_bg=0x7f020011;
+        public static final int curriculum_selector=0x7f020012;
+        public static final int editinfo_edittext_bg=0x7f020013;
+        public static final int ic_arrow=0x7f020014;
+        public static final int ic_arrow_right=0x7f020015;
+        public static final int ic_back=0x7f020016;
+        public static final int ic_fail=0x7f020017;
+        public static final int ic_failed=0x7f020018;
+        public static final int ic_info=0x7f020019;
+        public static final int ic_infox=0x7f02001a;
+        public static final int ic_launcher=0x7f02001b;
+        public static final int ic_left=0x7f02001c;
+        public static final int ic_login=0x7f02001d;
+        public static final int ic_logo=0x7f02001e;
+        public static final int ic_menu=0x7f02001f;
+        public static final int ic_menu_1=0x7f020020;
+        public static final int ic_menu_10=0x7f020021;
+        public static final int ic_menu_11=0x7f020022;
+        public static final int ic_menu_12=0x7f020023;
+        public static final int ic_menu_2=0x7f020024;
+        public static final int ic_menu_3=0x7f020025;
+        public static final int ic_menu_4=0x7f020026;
+        public static final int ic_menu_4_2=0x7f020027;
+        public static final int ic_menu_5=0x7f020028;
+        public static final int ic_menu_6=0x7f020029;
+        public static final int ic_menu_7=0x7f02002a;
+        public static final int ic_menu_8=0x7f02002b;
+        public static final int ic_menu_9=0x7f02002c;
+        public static final int ic_profile=0x7f02002d;
+        public static final int ic_right=0x7f02002e;
+        public static final int ic_signout=0x7f02002f;
+        public static final int ic_success=0x7f020030;
+        public static final int image_bg=0x7f020031;
+        public static final int list_focused_onlinehcmup=0x7f020032;
+        public static final int list_pressed_onlinehcmup=0x7f020033;
+        public static final int list_selector=0x7f020034;
+        public static final int listview_bg=0x7f020035;
+        public static final int listview_bg_hover=0x7f020036;
+        public static final int login_button_bg=0x7f020037;
+        public static final int login_edittext_bg=0x7f020038;
+        public static final int login_gradient=0x7f020039;
+        public static final int menu_dropdown_panel_onlinehcmup=0x7f02003a;
+        public static final int progress_bg_onlinehcmup=0x7f02003b;
+        public static final int progress_horizontal_onlinehcmup=0x7f02003c;
+        public static final int progress_primary_onlinehcmup=0x7f02003d;
+        public static final int progress_secondary_onlinehcmup=0x7f02003e;
+        public static final int register_btn_0=0x7f02003f;
+        public static final int register_btn_1=0x7f020040;
+        public static final int register_btn_2=0x7f020041;
+        public static final int selectable_background_onlinehcmup=0x7f020042;
+        public static final int shadow=0x7f020043;
+        public static final int spinner_ab_default_onlinehcmup=0x7f020044;
+        public static final int spinner_ab_disabled_onlinehcmup=0x7f020045;
+        public static final int spinner_ab_focused_onlinehcmup=0x7f020046;
+        public static final int spinner_ab_pressed_onlinehcmup=0x7f020047;
+        public static final int spinner_background_ab_onlinehcmup=0x7f020048;
+        public static final int spinner_selector=0x7f020049;
+        public static final int tab_indicator_ab_onlinehcmup=0x7f02004a;
+        public static final int tab_selected_focused_onlinehcmup=0x7f02004b;
+        public static final int tab_selected_onlinehcmup=0x7f02004c;
+        public static final int tab_selected_pressed_onlinehcmup=0x7f02004d;
+        public static final int tab_unselected_focused_onlinehcmup=0x7f02004e;
+        public static final int tab_unselected_onlinehcmup=0x7f02004f;
+        public static final int tab_unselected_pressed_onlinehcmup=0x7f020050;
     }
     public static final class id {
-        public static final int XLHL=0x7f0a001b;
-        public static final int XLRLSV=0x7f0a001c;
-        public static final int action_choose_term=0x7f0a003c;
-        public static final int action_login=0x7f0a003d;
-        public static final int action_view_all=0x7f0a003f;
-        public static final int action_view_current=0x7f0a003e;
-        public static final int action_view_exam=0x7f0a0040;
+        public static final int action_choose_term=0x7f0a004a;
+        public static final int action_login=0x7f0a004b;
+        public static final int action_view_all=0x7f0a004d;
+        public static final int action_view_current=0x7f0a004c;
+        public static final int action_view_exam=0x7f0a004e;
         public static final int btn=0x7f0a0012;
         public static final int btnCancel=0x7f0a0014;
-        public static final int btnChangePass=0x7f0a0024;
-        public static final int btnDisaccumulate=0x7f0a0020;
-        public static final int btnEdit=0x7f0a0025;
-        public static final int btnInfo1=0x7f0a0026;
-        public static final int btnInfo2=0x7f0a0027;
+        public static final int btnChangePass=0x7f0a002d;
+        public static final int btnDisaccumulate=0x7f0a0017;
+        public static final int btnEdit=0x7f0a002e;
+        public static final int btnInfo1=0x7f0a002f;
+        public static final int btnInfo2=0x7f0a0030;
+        public static final int btnLeft=0x7f0a0022;
         public static final int btnLogin=0x7f0a0005;
         public static final int btnOK=0x7f0a0015;
-        public static final int btnRegister=0x7f0a0021;
-        public static final int btnResult=0x7f0a001f;
+        public static final int btnRegister=0x7f0a0018;
+        public static final int btnResult=0x7f0a0016;
+        public static final int btnRight=0x7f0a0023;
+        public static final int calendar_content=0x7f0a0025;
+        public static final int changeDate=0x7f0a0020;
         public static final int content=0x7f0a0007;
-        public static final int content1=0x7f0a002a;
-        public static final int content2=0x7f0a002c;
-        public static final int content3=0x7f0a002e;
-        public static final int control=0x7f0a0022;
-        public static final int credit=0x7f0a0030;
-        public static final int curriID=0x7f0a003b;
-        public static final int curriName=0x7f0a0032;
-        public static final int date=0x7f0a0033;
-        public static final int details=0x7f0a001e;
+        public static final int content1=0x7f0a0033;
+        public static final int content2=0x7f0a0035;
+        public static final int content3=0x7f0a0037;
+        public static final int control=0x7f0a002b;
+        public static final int credit=0x7f0a0039;
+        public static final int curriName=0x7f0a0048;
+        public static final int date=0x7f0a0021;
+        public static final int details=0x7f0a001c;
         public static final int header=0x7f0a0000;
-        public static final int help=0x7f0a001d;
-        public static final int helpTitle=0x7f0a003a;
-        public static final int key=0x7f0a0037;
-        public static final int layout=0x7f0a0028;
-        public static final int lblStudyProgram=0x7f0a0038;
+        public static final int help=0x7f0a001b;
+        public static final int hour_0=0x7f0a003b;
+        public static final int info=0x7f0a0049;
+        public static final int key=0x7f0a0046;
+        public static final int labelHeader=0x7f0a0024;
+        public static final int layout=0x7f0a0031;
         public static final int lblnew=0x7f0a000d;
         public static final int lblold=0x7f0a000c;
         public static final int lblpassword=0x7f0a0003;
@@ -150,30 +167,42 @@ public final class R {
         public static final int lblusername=0x7f0a0001;
         public static final int listview=0x7f0a0009;
         public static final int mainLayout=0x7f0a0006;
-        public static final int mark4=0x7f0a0018;
-        public static final int markAvg=0x7f0a0019;
+        public static final int mark4=0x7f0a0026;
+        public static final int markAvg=0x7f0a0027;
+        public static final int markRank=0x7f0a0029;
         public static final int menu=0x7f0a0008;
-        public static final int menuitem=0x7f0a0031;
+        public static final int menuitem=0x7f0a003a;
         public static final int newsdetails=0x7f0a000a;
-        public static final int profile=0x7f0a0023;
-        public static final int rlsv=0x7f0a001a;
-        public static final int shortdetails=0x7f0a0034;
+        public static final int profile=0x7f0a002c;
+        public static final int rlsv=0x7f0a0028;
+        public static final int rlsvRank=0x7f0a002a;
+        public static final int shortdetails=0x7f0a0044;
+        public static final int spnYear=0x7f0a001f;
         public static final int strut=0x7f0a0013;
-        public static final int studentID=0x7f0a0017;
-        public static final int studentName=0x7f0a0016;
-        public static final int studyProgramName=0x7f0a0039;
-        public static final int term_layout=0x7f0a002f;
-        public static final int text=0x7f0a0035;
+        public static final int studentID=0x7f0a001a;
+        public static final int studentName=0x7f0a0019;
+        public static final int term_layout=0x7f0a0038;
+        public static final int text=0x7f0a0045;
+        public static final int time_0=0x7f0a003c;
+        public static final int time_0_1=0x7f0a003d;
+        public static final int time_0_2=0x7f0a003e;
+        public static final int time_0_3=0x7f0a003f;
+        public static final int time_0_4=0x7f0a0040;
+        public static final int time_0_5=0x7f0a0041;
+        public static final int time_0_6=0x7f0a0042;
+        public static final int time_0_7=0x7f0a0043;
         public static final int title=0x7f0a000b;
-        public static final int title1=0x7f0a0029;
-        public static final int title2=0x7f0a002b;
-        public static final int title3=0x7f0a002d;
+        public static final int title1=0x7f0a0032;
+        public static final int title2=0x7f0a0034;
+        public static final int title3=0x7f0a0036;
         public static final int txtNew=0x7f0a0010;
         public static final int txtOld=0x7f0a000f;
         public static final int txtPassword=0x7f0a0004;
         public static final int txtReNew=0x7f0a0011;
         public static final int txtUsername=0x7f0a0002;
-        public static final int value=0x7f0a0036;
+        public static final int value=0x7f0a0047;
+        public static final int viewCurrent=0x7f0a001e;
+        public static final int year=0x7f0a001d;
     }
     public static final class layout {
         public static final int activity_login=0x7f030000;
@@ -181,27 +210,30 @@ public final class R {
         public static final int activity_public_main=0x7f030002;
         public static final int details_news=0x7f030003;
         public static final int fragment_change_password=0x7f030004;
-        public static final int fragment_mark=0x7f030005;
-        public static final int fragment_register_curriculum=0x7f030006;
-        public static final int fragment_registered_current=0x7f030007;
-        public static final int fragment_student_contact=0x7f030008;
-        public static final int fragment_student_edit_info=0x7f030009;
-        public static final int fragment_student_info=0x7f03000a;
-        public static final int fragment_study_program=0x7f03000b;
-        public static final int fragment_study_program_term=0x7f03000c;
-        public static final int frame_news_list=0x7f03000d;
-        public static final int menu_item=0x7f03000e;
-        public static final int row_mark=0x7f03000f;
-        public static final int row_news=0x7f030010;
-        public static final int row_popup_list=0x7f030011;
-        public static final int row_registered_current=0x7f030012;
-        public static final int row_student_edit_info=0x7f030013;
-        public static final int row_student_info=0x7f030014;
-        public static final int row_study_program_term_details=0x7f030015;
-        public static final int temp_fragment_study_program=0x7f030016;
-        public static final int temp_fragment_study_program_term=0x7f030017;
-        public static final int temp_row_study_program=0x7f030018;
-        public static final int temp_row_study_program_term=0x7f030019;
+        public static final int fragment_register_curriculum=0x7f030005;
+        public static final int fragment_registered_current=0x7f030006;
+        public static final int fragment_schedule=0x7f030007;
+        public static final int fragment_score=0x7f030008;
+        public static final int fragment_student_contact=0x7f030009;
+        public static final int fragment_student_edit_info=0x7f03000a;
+        public static final int fragment_student_info=0x7f03000b;
+        public static final int fragment_study_program=0x7f03000c;
+        public static final int fragment_study_program_term=0x7f03000d;
+        public static final int frame_news_list=0x7f03000e;
+        public static final int frame_popup=0x7f03000f;
+        public static final int menu_item=0x7f030010;
+        public static final int row_content_calendar=0x7f030011;
+        public static final int row_news=0x7f030012;
+        public static final int row_popup_list=0x7f030013;
+        public static final int row_popup_score_detail=0x7f030014;
+        public static final int row_popup_spinner=0x7f030015;
+        public static final int row_registered_current=0x7f030016;
+        public static final int row_score=0x7f030017;
+        public static final int row_spinner=0x7f030018;
+        public static final int row_student_contact=0x7f030019;
+        public static final int row_student_edit_info=0x7f03001a;
+        public static final int row_student_info=0x7f03001b;
+        public static final int row_study_program_term_details=0x7f03001c;
     }
     public static final class menu {
         public static final int examinate=0x7f090000;
@@ -217,15 +249,17 @@ public final class R {
         /**  Menu 
          */
         public static final int arrow_right=0x7f060003;
-        public static final int btn_cancel=0x7f060045;
-        public static final int btn_change_password=0x7f060027;
-        public static final int btn_edit=0x7f060028;
-        public static final int btn_ok=0x7f060044;
-        public static final int edit_password_noti_dismatch=0x7f06002f;
-        public static final int edit_password_noti_null=0x7f06002d;
-        public static final int edit_password_noti_success=0x7f060030;
-        public static final int edit_password_noti_wrong_old=0x7f06002e;
-        public static final int error_connect=0x7f06001c;
+        public static final int btn_cancel=0x7f060047;
+        public static final int btn_change_password=0x7f060025;
+        public static final int btn_edit=0x7f060026;
+        public static final int btn_ok=0x7f060046;
+        public static final int chooseTerm=0x7f060053;
+        public static final int chooseYear=0x7f060052;
+        public static final int edit_password_noti_dismatch=0x7f06002d;
+        public static final int edit_password_noti_null=0x7f06002b;
+        public static final int edit_password_noti_success=0x7f06002e;
+        public static final int edit_password_noti_wrong_old=0x7f06002c;
+        public static final int error_connect=0x7f060019;
         /** 
     <string-array name="key_student">
         <item>@array/key_student_info</item>
@@ -234,11 +268,15 @@ public final class R {
         <item>@array/key_student_contact_2</item>
     </string-array>
 
+
     
          */
-        public static final int error_server=0x7f06001b;
+        public static final int error_server=0x7f060018;
         public static final int hello_world=0x7f060002;
-        public static final int help_title=0x7f060036;
+        public static final int help_change_curri=0x7f060036;
+        public static final int help_change_exam=0x7f060037;
+        public static final int help_title=0x7f060034;
+        public static final int help_title_exam=0x7f060035;
         /** 
     <string name="key_course_1">Khóa học</string>
     <string name="key_course_2">Niên khóa</string>
@@ -264,10 +302,11 @@ public final class R {
         <item>@string/key_course_10</item>
     </string-array>
 
+
     
  Key Student Contact 
          */
-        public static final int key_contact_1_title=0x7f060017;
+        public static final int key_contact_1_title=0x7f060014;
         /** 
     <string name="key_contact_1_1">Điện thoại</string>
     <string name="key_contact_1_2">Di động</string>
@@ -283,13 +322,15 @@ public final class R {
         <item>@string/key_contact_1_5</item>
     </string-array>
 
+
     
          */
-        public static final int key_contact_2_title=0x7f060018;
+        public static final int key_contact_2_title=0x7f060015;
         /** 
     <string name="key_contact_2_1">Họ tên</string>
     <string name="key_contact_2_2">Điện thoại</string>
     <string name="key_contact_2_3">Địa chỉ</string>
+
 
     
 
@@ -299,10 +340,11 @@ public final class R {
         <item>@string/key_contact_2_3</item>
     </string-array>
 
+
     
          */
-        public static final int key_contact_3_title=0x7f060019;
-        public static final int key_contact_title=0x7f06001a;
+        public static final int key_contact_3_title=0x7f060016;
+        public static final int key_contact_title=0x7f060017;
         /** 
     <string name="key_info_1">Mã số SV</string>
     <string name="key_info_2">Tên đầy đủ</string>
@@ -334,27 +376,26 @@ public final class R {
         <item>@string/key_info_13</item>
     </string-array>
 
+
     
  Key Student Course 
          */
-        public static final int key_course_title=0x7f060016;
+        public static final int key_course_title=0x7f060013;
         /**  Key Student Info 
          */
-        public static final int key_info_title=0x7f060015;
-        public static final int login=0x7f06001f;
-        public static final int login_fail_noti_detail1=0x7f060021;
-        public static final int login_fail_noti_detail2=0x7f060022;
-        public static final int login_fail_noti_title=0x7f060020;
-        public static final int login_password=0x7f06001e;
-        public static final int login_username=0x7f06001d;
-        public static final int logout=0x7f060023;
-        public static final int logout_noti_detail=0x7f060042;
-        public static final int logout_noti_negative=0x7f060043;
-        public static final int logout_noti_title=0x7f060041;
-        public static final int mark4=0x7f060040;
+        public static final int key_info_title=0x7f060012;
+        public static final int login=0x7f06001d;
+        public static final int login_fail_noti_detail1=0x7f06001f;
+        public static final int login_fail_noti_detail2=0x7f060020;
+        public static final int login_fail_noti_title=0x7f06001e;
+        public static final int login_password=0x7f06001c;
+        public static final int login_username=0x7f06001b;
+        public static final int logout=0x7f060021;
+        public static final int logout_noti_detail=0x7f060044;
+        public static final int logout_noti_negative=0x7f060045;
+        public static final int logout_noti_title=0x7f060043;
+        public static final int mark4=0x7f060042;
         public static final int menu_1=0x7f060007;
-        public static final int menu_10=0x7f060013;
-        public static final int menu_11=0x7f060014;
         public static final int menu_2=0x7f060008;
         public static final int menu_3=0x7f060009;
         public static final int menu_4=0x7f06000a;
@@ -362,46 +403,61 @@ public final class R {
         public static final int menu_4_2=0x7f06000c;
         public static final int menu_5=0x7f06000d;
         public static final int menu_5_1=0x7f06000e;
+        /**  <string name="menu_6">Ý kiến - Thảo luận</string> 
+         */
         public static final int menu_6=0x7f06000f;
+        /**  <string name="menu_8">Ghi danh môn tự chọn</string> 
+         */
         public static final int menu_7=0x7f060010;
+        /**  <string name="menu_10">Hướng dẫn sử dụng</string> 
+         */
         public static final int menu_8=0x7f060011;
-        public static final int menu_9=0x7f060012;
-        public static final int menu_choose_term=0x7f06003f;
+        public static final int menu_choose_term=0x7f060041;
         public static final int menu_main_private=0x7f060006;
         public static final int menu_main_public=0x7f060005;
-        public static final int menu_view_current=0x7f060039;
-        public static final int menu_view_details=0x7f060038;
-        public static final int menu_view_exam=0x7f06003e;
-        public static final int new_password=0x7f06002b;
-        public static final int noti_loading=0x7f060046;
-        public static final int noti_null=0x7f060047;
-        public static final int old_password=0x7f06002a;
-        public static final int private_news_details=0x7f060025;
-        public static final int profile=0x7f060026;
-        public static final int public_news_details=0x7f060024;
-        public static final int register_curriculum_disaccumulate=0x7f06003c;
-        public static final int register_curriculum_register=0x7f06003d;
-        public static final int register_curriculum_result=0x7f060037;
-        public static final int register_curriculum_result_current=0x7f06003b;
-        public static final int register_curriculum_result_registered=0x7f06003a;
-        public static final int retype_new_password=0x7f06002c;
-        public static final int student_change_password_title=0x7f060029;
-        public static final int student_edit_info_success=0x7f060032;
-        public static final int student_edit_info_title=0x7f060031;
-        public static final int study_program_credit=0x7f060033;
-        public static final int study_program_term_title=0x7f060035;
-        public static final int study_program_title=0x7f060034;
+        public static final int menu_view_current=0x7f06003a;
+        public static final int menu_view_details=0x7f060039;
+        public static final int menu_view_exam=0x7f060040;
+        public static final int new_password=0x7f060029;
+        public static final int noti_loading=0x7f060048;
+        public static final int noti_null=0x7f060049;
+        public static final int notification=0x7f06001a;
+        public static final int old_password=0x7f060028;
+        public static final int private_news_details=0x7f060023;
+        public static final int profile=0x7f060024;
+        public static final int public_news_details=0x7f060022;
+        public static final int register_curriculum_disaccumulate=0x7f06003d;
+        public static final int register_curriculum_register=0x7f06003e;
+        public static final int register_curriculum_result=0x7f060038;
+        public static final int register_curriculum_result_current=0x7f06003c;
+        public static final int register_curriculum_result_registered=0x7f06003b;
+        public static final int retype_new_password=0x7f06002a;
+        public static final int student_change_password_title=0x7f060027;
+        public static final int student_edit_info_success=0x7f060030;
+        public static final int student_edit_info_title=0x7f06002f;
+        public static final int study_program_credit=0x7f060031;
+        public static final int study_program_term_title=0x7f060033;
+        public static final int study_program_title=0x7f060032;
+        public static final int titleFri=0x7f06004f;
+        public static final int titleMon=0x7f06004b;
+        public static final int titlePeriod=0x7f06004a;
+        public static final int titleSat=0x7f060050;
+        public static final int titleSun=0x7f060051;
+        public static final int titleThu=0x7f06004e;
+        public static final int titleTue=0x7f06004c;
+        public static final int titleWed=0x7f06004d;
+        public static final int title_schedule=0x7f06003f;
     }
     public static final class style {
-        public static final int ActionBar_MenuTextStyle=0x7f080005;
-        public static final int ActionBar_Solid_Onlinehcmup=0x7f080006;
-        public static final int ActionBar_TitleTextStyle=0x7f080007;
-        public static final int ActionBar_Transparent_Onlinehcmup=0x7f080008;
-        public static final int ActionBarTabStyle_Onlinehcmup=0x7f08000b;
-        public static final int ActionButton_CloseMode_Onlinehcmup=0x7f08000e;
+        public static final int ActionBar_MenuTextStyle=0x7f08000c;
+        public static final int ActionBar_Solid_Onlinehcmup=0x7f08000d;
+        public static final int ActionBar_TitleTextStyle=0x7f08000e;
+        public static final int ActionBar_Transparent_Onlinehcmup=0x7f08000f;
+        public static final int ActionBarTabStyle_Onlinehcmup=0x7f080012;
+        public static final int ActionButton_CloseMode_Onlinehcmup=0x7f080015;
         /**  background title, content, button 
          */
-        public static final int AlertDialogCustom=0x7f080002;
+        public static final int AlertDialogCustom=0x7f080008;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -422,14 +478,21 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f080001;
-        public static final int DropDownListView_Onlinehcmup=0x7f08000a;
-        public static final int DropDownNav_Onlinehcmup=0x7f08000c;
-        public static final int PopupMenu_Onlinehcmup=0x7f080009;
-        public static final int ProgressBar_Onlinehcmup=0x7f08000d;
-        public static final int ProgressDialogCustom=0x7f080003;
-        public static final int Theme_Onlinehcmup=0x7f080004;
+        public static final int Calendar_TitleLabel=0x7f080002;
+        public static final int Calendar_TitleLabel_Content=0x7f080004;
+        public static final int Calendar_TitleLabel_Content_Time=0x7f080005;
+        public static final int CalendarColumnLinear=0x7f080006;
+        public static final int CalendarRowLinear=0x7f080007;
+        public static final int CalendarTitleLinear=0x7f080003;
+        public static final int DropDownListView_Onlinehcmup=0x7f080011;
+        public static final int DropDownNav_Onlinehcmup=0x7f080013;
+        public static final int PopupMenu_Onlinehcmup=0x7f080010;
+        public static final int ProgressBar_Onlinehcmup=0x7f080014;
+        public static final int ProgressDialogCustom=0x7f080009;
+        public static final int ScoreDetailDialog=0x7f08000a;
+        public static final int Theme_Onlinehcmup=0x7f08000b;
         /**  this style is only referenced in a Light.DarkActionBar based theme 
          */
-        public static final int Theme_Onlinehcmup_Widget=0x7f08000f;
+        public static final int Theme_Onlinehcmup_Widget=0x7f080016;
     }
 }

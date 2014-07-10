@@ -18,4 +18,12 @@ public class PublicNews {
 		MessageNote = _MessageNote;
 		FileAttach = _FileAttach;
 	}
+
+	public PublicNews(String... strings) {
+		MessageSubject = strings[0];
+		CreationDate = strings[1];
+		SenderName = strings[2];
+		MessageNote = strings[3];
+		FileAttach = strings[4];
+	}
 }

@@ -1,0 +1,55 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="Calendar.TitleLabel" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:layout_weight">0.125</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:typeface">serif</item>
+        <item name="android:padding">1dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="CalendarTitleLinear">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/calendar_title_bg</item>
+        <item name="android:divider">@drawable/calendar_divider</item>
+        <item name="android:showDividers">middle</item>
+    </style>
+
+    <style name="Calendar.TitleLabel.Content">
+        <item name="android:textColor">#000</item>
+    </style>
+
+    <style name="Calendar.TitleLabel.Content.Time">
+        <item name="android:background">@drawable/calendar_content_period_bg</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="CalendarColumnLinear" parent="@style/CalendarTitleLinear">
+        <item name="android:background">@drawable/calendar_content_bg</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="CalendarRowLinear" parent="@style/CalendarTitleLinear">
+        <item name="android:background">@drawable/calendar_content_bg</item>
+        <item name="android:divider">@drawable/calendar_divider_gray</item>
+    </style>
+
+    <string name="titlePeriod">Tiết</string>
+    <string name="titleMon">Thứ 2</string>
+    <string name="titleTue">Thứ 3</string>
+    <string name="titleWed">Thứ 4</string>
+    <string name="titleThu">Thứ 5</string>
+    <string name="titleFri">Thứ 6</string>
+    <string name="titleSat">Thứ 7</string>
+    <string name="titleSun">Chủ nhật</string>
+    <string name="chooseYear">Năm học</string>
+    <string name="chooseTerm">Học kỳ</string>
+
+</resources>

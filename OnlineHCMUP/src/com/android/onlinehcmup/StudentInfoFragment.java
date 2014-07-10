@@ -1,7 +1,6 @@
 package com.android.onlinehcmup;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -18,8 +17,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.android.onlinehcmup.Adapter.StudentInfoAdapter;
+import com.android.onlinehcmup.Adapter.KeyValueAdapter;
 import com.android.onlinehcmup.JSON.Connect;
 import com.android.onlinehcmup.JSON.Key;
 import com.android.onlinehcmup.Model.JSONType;
@@ -28,57 +28,61 @@ import com.android.onlinehcmup.Support.StaticTAG;
 
 public class StudentInfoFragment extends BaseFragment {
 
-	public static final String KEY_TYPE = "type";
-	public static final int KEY_TYPE_INFO = 0, KEY_TYPE_COURSE = 1,
-			KEY_TYPE_CONTACT = 2;
-	public static int TYPE = KEY_TYPE_INFO;
-	private Bundle extras;
-	private static View rootView;
-	public static String[] keys, values, key1, value1;
-	public static Activity activity;
-	public static ImageView image;
-	private static ArrayList<JSONType> listAdapter, listAdapter1;
-	private static DisplayMetrics displaymetrics;
-	private static int[] color = new int[] { R.color.btnInfoColor,
+	// constant values
+	public static final String KEY_TYPE = "TYPE";
+	public static final int TYPE_INFO = 0, TYPE_COURSE = 1, TYPE_CONTACT = 2;
+	static final int[] color = new int[] { R.color.btnInfoColor,
 			R.color.btnCourseColor, R.color.btnContactColor };
-	private int[] actionBarTitle = new int[] { R.string.menu_1,
-			R.string.menu_1, R.string.key_contact_title };
-	private static int[] btnNav = new int[] { R.string.key_info_title,
+	final int[] actionBarTitle = new int[] { R.string.menu_1, R.string.menu_1,
+			R.string.key_contact_title };
+	final static int[] btnNav = new int[] { R.string.key_info_title,
 			R.string.key_course_title, R.string.key_contact_title };
-	private static int[] listTitle = new int[] { R.string.key_info_title,
+	final static int[] listTitle = new int[] { R.string.key_info_title,
 			R.string.key_course_title, R.string.key_contact_1_title,
 			R.string.key_contact_2_title };
-	private int[] layout = new int[] { R.layout.fragment_student_info,
+	final int[] layout = new int[] { R.layout.fragment_student_info,
 			R.layout.fragment_student_info, R.layout.fragment_student_contact };
-	private static String[] tag = new String[] { StaticTAG.TAG_STUDENT_INFO,
+	final String[] tag = new String[] { StaticTAG.TAG_STUDENT_INFO,
 			StaticTAG.TAG_STUDENT_COURSE, StaticTAG.TAG_STUDENT_CONTACT };
-	private static String[][] keyType = new String[][] {
-			Key.KEY_STUDENT_INFO_VI, Key.KEY_STUDENT_COURSE_VI,
-			Key.KEY_STUDENT_CONTACT_1_VI, Key.KEY_STUDENT_CONTACT_2_VI };
-	public static SessionManager session;
+	final static String[][] keyType = new String[][] { Key.KEY_STUDENT_INFO_VI,
+			Key.KEY_STUDENT_COURSE_VI, Key.KEY_STUDENT_CONTACT_1_VI,
+			Key.KEY_STUDENT_CONTACT_2_VI };
+
+	public static Activity activity;
+	public static String[] values, value1;
+	public static int TYPE = TYPE_INFO;
+	public static ImageView image;
+
+	SessionManager session;
+	DisplayMetrics displaymetrics;
+	static String[] keys, key1;
+	static View rootView;
+	static ArrayList<JSONType> listAdapter, listAdapter1;
 
 	public StudentInfoFragment() {
 	}
 
-	// load all data from JSON
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		session = new SessionManager(getActivity().getApplicationContext());
+		activity = getActivity();
+		session = new SessionManager(activity);
 		session.checkLogin();
 		getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
-		activity = getActivity();
-		extras = getArguments();
+		Bundle extras = getArguments();
 		if (extras != null) {
 			TYPE = extras.getInt(KEY_TYPE);
 		}
-		getActivity().getActionBar().setTitle(
-				getActivity().getResources().getString(actionBarTitle[TYPE]));
+
+		setTitle(actionBarTitle[TYPE]);
+
 		rootView = inflater.inflate(layout[TYPE], container, false);
+		image = (ImageView) rootView.findViewById(R.id.profile);
+
 		displaymetrics = new DisplayMetrics();
 		activity.getWindowManager().getDefaultDisplay()
 				.getMetrics(displaymetrics);
-		image = (ImageView) rootView.findViewById(R.id.profile);
+
 		double newHeight = displaymetrics.heightPixels / 7;
 		image.getLayoutParams().height = (int) newHeight;
 		image.getLayoutParams().width = (int) newHeight;
@@ -93,13 +97,11 @@ public class StudentInfoFragment extends BaseFragment {
 		Button btn1 = (Button) rootView.findViewById(R.id.btnInfo1);
 		Button btn2 = (Button) rootView.findViewById(R.id.btnInfo2);
 
-		btn1.setText(activity.getResources().getString(btnNav[(TYPE + 1) % 3]));
-		btn2.setText(activity.getResources().getString(btnNav[(TYPE + 2) % 3]));
+		btn1.setText(btnNav[(TYPE + 1) % 3]);
+		btn2.setText(btnNav[(TYPE + 2) % 3]);
 
-		btn1.setBackgroundColor(activity.getResources().getColor(
-				color[(TYPE + 1) % 3]));
-		btn2.setBackgroundColor(activity.getResources().getColor(
-				color[(TYPE + 2) % 3]));
+		btn1.setBackgroundColor(getColor(color[(TYPE + 1) % 3]));
+		btn2.setBackgroundColor(getColor(color[(TYPE + 2) % 3]));
 
 		btn1.setOnClickListener(new View.OnClickListener() {
 
@@ -108,6 +110,7 @@ public class StudentInfoFragment extends BaseFragment {
 				openFragment((TYPE + 1) % 3);
 			}
 		});
+
 		btn2.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -115,47 +118,49 @@ public class StudentInfoFragment extends BaseFragment {
 				openFragment((TYPE + 2) % 3);
 			}
 		});
+
 		TextView title = (TextView) rootView.findViewById(R.id.title);
-		title.setText(activity.getResources().getString(listTitle[TYPE]));
-		title.setBackgroundColor(activity.getResources().getColor(color[TYPE]));
-		TextView btnChangePassword = (TextView) rootView
+		title.setText(getString(listTitle[TYPE]));
+		title.setBackgroundColor(getColor(color[TYPE]));
+		TextView btnChgPass = (TextView) rootView
 				.findViewById(R.id.btnChangePass);
 
-		btnChangePassword.measure(MeasureSpec.UNSPECIFIED,
-				MeasureSpec.UNSPECIFIED);
-		float scale = (float) (1.0 * displaymetrics.heightPixels / 16)
-				/ btnChangePassword.getMeasuredHeight();
-		if (scale < 1)
-			btnChangePassword.setScaleY(scale);
-		btnChangePassword.setOnClickListener(new View.OnClickListener() {
+		btnChgPass = scale(btnChgPass, 16);
+
+		btnChgPass.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
-				activity.getFragmentManager()
-						.beginTransaction()
-						.replace(R.id.content,
-								new StudentChangePasswordFragment(),
-								StaticTAG.TAG_STUDENT_CHANGE_PASSWORD)
-						.addToBackStack(null).commit();
+				if (Connect.isConnectingToInternet(activity))
+					activity.getFragmentManager()
+							.beginTransaction()
+							.replace(R.id.content,
+									new ChangePasswordFragment(),
+									StaticTAG.TAG_STUDENT_CHANGE_PASSWORD)
+							.addToBackStack(null).commit();
+				else
+					Toast.makeText(activity, R.string.error_connect,
+							Toast.LENGTH_LONG).show();
 			}
 		});
+
 		if (rootView.findViewById(R.id.btnEdit) != null) {
 			TextView btnEdit = (TextView) rootView.findViewById(R.id.btnEdit);
-			btnEdit.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
-			scale = (float) (1.0 * displaymetrics.heightPixels / 16)
-					/ btnEdit.getMeasuredHeight();
-			if (scale < 1)
-				btnEdit.setScaleY(scale);
+			btnEdit = scale(btnEdit, 16);
 			btnEdit.setOnClickListener(new View.OnClickListener() {
 
 				@Override
 				public void onClick(View arg0) {
-					activity.getFragmentManager()
-							.beginTransaction()
-							.replace(R.id.content,
-									new StudentEditInfoFragment(),
-									StaticTAG.TAG_STUDENT_EDIT_INFO)
-							.addToBackStack(null).commit();
+					if (Connect.isConnectingToInternet(activity))
+						activity.getFragmentManager()
+								.beginTransaction()
+								.replace(R.id.content,
+										new StudentEditInfoFragment(),
+										StaticTAG.TAG_STUDENT_EDIT_INFO)
+								.addToBackStack(null).commit();
+					else
+						Toast.makeText(activity, R.string.error_connect,
+								Toast.LENGTH_LONG).show();
 				}
 			});
 		}
@@ -164,19 +169,27 @@ public class StudentInfoFragment extends BaseFragment {
 		key1 = keyType[keyType.length - 1];
 		value1 = new String[key1.length];
 
-		session = new SessionManager(StaticTAG.ACTIVITY);
-		HashMap<String, String> user = session.getUserDetails();
-		String studentID = user.get(SessionManager.KEY_STUDENTID);
+		String studentID = session.getStudentID();
 		Connect connect = new Connect(activity);
-		connect.LoadStudentInfo(studentID, TYPE);
+		PrivateMainActivity.currentTask = connect.LoadStudentInfo(studentID,
+				TYPE);
 
 		return rootView;
 	}
 
-	private static void openFragment(int btnType) {
+	private TextView scale(TextView btn, int divide) {
+		btn.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
+		float scale = (float) (1.0 * displaymetrics.heightPixels / 16)
+				/ btn.getMeasuredHeight();
+		if (scale < 1)
+			btn.setScaleY(scale);
+		return btn;
+	}
+
+	private void openFragment(int btnType) {
 		Fragment fragment = new StudentInfoFragment();
 		Bundle args = new Bundle();
-		args.putInt(StudentInfoFragment.KEY_TYPE, btnType);
+		args.putInt(KEY_TYPE, btnType);
 		fragment.setArguments(args);
 		FragmentManager fragmentManager = activity.getFragmentManager();
 		if (fragmentManager.getBackStackEntryCount() > 0)
@@ -192,7 +205,8 @@ public class StudentInfoFragment extends BaseFragment {
 		}
 		if (rootView.findViewById(R.id.title1) == null) {
 			ListView content = (ListView) rootView.findViewById(R.id.content);
-			content.setAdapter(new StudentInfoAdapter(activity, listAdapter));
+			content.setAdapter(new KeyValueAdapter(activity, listAdapter,
+					R.layout.row_student_info, null));
 		} else
 			LoadContactFragment();
 	}
@@ -203,7 +217,7 @@ public class StudentInfoFragment extends BaseFragment {
 		title1.setText(activity.getResources().getString(
 				listTitle[listTitle.length - 1]));
 		title1.setBackgroundColor(activity.getResources().getColor(color[TYPE]));
-		
+
 		listAdapter1 = new ArrayList<JSONType>();
 		for (int i = 0; i < key1.length; i++) {
 			listAdapter1.add(new JSONType(key1[i], value1[i]));
@@ -211,8 +225,8 @@ public class StudentInfoFragment extends BaseFragment {
 
 		LinearLayout content = (LinearLayout) rootView
 				.findViewById(R.id.content);
-		StudentInfoAdapter adapter = new StudentInfoAdapter(activity,
-				listAdapter);
+		KeyValueAdapter adapter = new KeyValueAdapter(activity, listAdapter,
+				R.layout.row_student_contact, null);
 		content.removeAllViews();
 		for (int i = 0; i < adapter.getCount(); i++) {
 			View item = adapter.getView(i, null, null);
@@ -221,7 +235,8 @@ public class StudentInfoFragment extends BaseFragment {
 
 		LinearLayout content1 = (LinearLayout) rootView
 				.findViewById(R.id.content1);
-		adapter = new StudentInfoAdapter(activity, listAdapter1);
+		adapter = new KeyValueAdapter(activity, listAdapter1,
+				R.layout.row_student_contact, null);
 		content1.removeAllViews();
 		for (int i = 0; i < adapter.getCount(); i++) {
 			View item = adapter.getView(i, null, null);

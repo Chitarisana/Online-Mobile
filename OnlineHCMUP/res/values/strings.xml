@@ -27,38 +27,42 @@
     <string name="menu_4_2">Lịch thi</string>
     <string name="menu_5">Xem điểm</string>
     <string name="menu_5_1">Xem điểm tích lũy</string>
-    <string name="menu_6">Ý kiến - Thảo luận</string>
-    <string name="menu_7">Tài khoản sinh viên</string>
-    <string name="menu_8">Ghi danh môn tự chọn</string>
-    <string name="menu_9">Đăng ký xét tốt nghiệp</string>
-    <string name="menu_10">Hướng dẫn sử dụng</string>
-    <string name="menu_11">Thoát</string>
+    <!-- <string name="menu_6">Ý kiến - Thảo luận</string> -->
+    <string name="menu_6">Tài khoản sinh viên</string>
+    <!-- <string name="menu_8">Ghi danh môn tự chọn</string> -->
+    <string name="menu_7">Đăng ký xét tốt nghiệp</string>
+    <!-- <string name="menu_10">Hướng dẫn sử dụng</string> -->
+    <string name="menu_8">Thoát</string>
 
     <string-array name="menu_array">
         <item>@string/menu_main_private</item>
         <item>@string/menu_1</item>
         <item>@string/menu_2</item>
         <item>@string/menu_3</item>
-        <item>@string/menu_4</item>
+        <item>@string/menu_4_1</item>
+        <item>@string/menu_4_2</item>
         <item>@string/menu_5</item>
         <item>@string/menu_6</item>
         <item>@string/menu_7</item>
         <item>@string/menu_8</item>
+        <!--
         <item>@string/menu_9</item>
         <item>@string/menu_10</item>
         <item>@string/menu_11</item>
+        -->
     </string-array>
     <string-array name="menu_icon">
         <item>@drawable/ic_menu_1</item>
         <item>@drawable/ic_menu_2</item>
         <item>@drawable/ic_menu_3</item>
-        <item>@drawable/ic_menu_4</item>
+        <item>@drawable/ic_menu_4</item>         
         <item>@drawable/ic_menu_5</item>
-        <item>@drawable/ic_menu_6</item>
+        <item>@drawable/ic_menu_4_2</item>
+        <!-- <item>@drawable/ic_menu_6</item> -->
         <item>@drawable/ic_menu_7</item>
-        <item>@drawable/ic_menu_8</item>
+        <!-- <item>@drawable/ic_menu_8</item> -->
         <item>@drawable/ic_menu_9</item>
-        <item>@drawable/ic_menu_10</item>
+        <!-- <item>@drawable/ic_menu_10</item> -->
         <item>@drawable/ic_menu_11</item>
         <item>@drawable/ic_menu_12</item>
     </string-array>
@@ -94,7 +98,7 @@
         <item>@string/key_info_11</item>
         <item>@string/key_info_12</item>
         <item>@string/key_info_13</item>
-    </string-array>
+    </string-array>
     -->
 
 
@@ -123,7 +127,7 @@
         <item>@string/key_course_8</item>
         <item>@string/key_course_9</item>
         <item>@string/key_course_10</item>
-    </string-array>
+    </string-array>
     -->
 
 
@@ -142,14 +146,14 @@
         <item>@string/key_contact_1_3</item>
         <item>@string/key_contact_1_4</item>
         <item>@string/key_contact_1_5</item>
-    </string-array>
+    </string-array>
     -->
 
     <string name="key_contact_2_title">Thông tin liên lạc người thân của sinh viên</string>
     <!--
     <string name="key_contact_2_1">Họ tên</string>
     <string name="key_contact_2_2">Điện thoại</string>
-    <string name="key_contact_2_3">Địa chỉ</string>
+    <string name="key_contact_2_3">Địa chỉ</string>
     -->
 
 
@@ -158,7 +162,7 @@
         <item>@string/key_contact_2_1</item>
         <item>@string/key_contact_2_2</item>
         <item>@string/key_contact_2_3</item>
-    </string-array>
+    </string-array>
     -->
     <string name="key_contact_3_title">Số điện thoại nhận tin nhắn</string>
     <string name="key_contact_title">Thông tin liên lạc</string>
@@ -169,11 +173,12 @@
         <item>@array/key_student_course</item>
         <item>@array/key_student_contact_1</item>
         <item>@array/key_student_contact_2</item>
-    </string-array>
+    </string-array>
     -->
 
     <string name="error_server">Không thể phân giải IP của server!</string>
-    <string name="error_connect">Không có kết nối!</string>
+    <string name="error_connect">Kiểm tra kết nối internet.</string>
+    <string name="notification">Thông báo</string>
     <string name="login_username">Tên đăng nhập</string>
     <string name="login_password">Mật khẩu</string>
     <string name="login">Đăng nhập</string>
@@ -199,7 +204,10 @@
     <string name="study_program_credit">Số tc</string>
     <string name="study_program_title">Kế hoạch đào tạo tổng thể</string>
     <string name="study_program_term_title">Danh sách các học phần</string>
-    <string name="help_title">Chọn một học phần để xem chi tiết</string>
+    <string name="help_title">Chọn 1 HP để xem chi tiết</string>
+    <string name="help_title_exam">Chọn 1 HP để xem lịch thi</string>
+    <string name="help_change_curri">Học phần: </string>
+    <string name="help_change_exam">Lịch thi Học phần: </string>
     <string name="register_curriculum_result">Kết quả đăng ký</string>
     <string name="menu_view_details">Xem chi tiết</string>
     <string name="menu_view_current">Xem hiện tại</string>
@@ -207,6 +215,7 @@
     <string name="register_curriculum_result_current">Các học phần hiện tại</string>
     <string name="register_curriculum_disaccumulate">Các học phần chưa tích lũy</string>
     <string name="register_curriculum_register">Đăng ký học phần</string>
+    <string name="title_schedule">Thời khóa biểu hiện tại</string>
     <string name="menu_view_exam">Xem lịch thi</string>
     <string name="menu_choose_term">Chọn học kỳ</string>
     <string name="mark4">Thang điểm 4</string>

@@ -9,7 +9,12 @@
     </style>
 
     <style name="ProgressDialogCustom" parent="@android:style/Theme.Holo.Dialog">
-        <item name="android:typeface">serif</item>        
+        <item name="android:typeface">serif</item>
+    </style>
+
+    <style name="ScoreDetailDialog" parent="@android:style/Theme.Holo.Dialog">
+        <item name="android:typeface">serif</item>
+        <item name="android:textSize">15sp</item>      
     </style>
 
 </resources>

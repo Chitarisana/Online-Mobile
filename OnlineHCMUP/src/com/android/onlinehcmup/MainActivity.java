@@ -8,48 +8,39 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 
-import com.android.onlinehcmup.Adapter.PublicNewsAdapter;
 import com.android.onlinehcmup.JSON.Connect;
 import com.android.onlinehcmup.Model.PublicNews;
+import com.android.onlinehcmup.Support.SessionManager;
 import com.android.onlinehcmup.Support.StaticTAG;
 
 public class MainActivity extends Activity {
 
-	PublicNewsAdapter adapter;
-	public static ViewGroup listGroup;
 	public static ArrayList<PublicNews> data;
 	public static Activity activity;
+	SessionManager session;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_public_main);
+
 		activity = this;
-		// create data
-		// get News
 
-		// getActionBar().setDisplayHomeAsUpEnabled(true);
-		// show UP button
-		// getActionBar().setIcon(R.drawable.ic_login);
-		// change icon of title
-		// getActionBar().setTitle(R.string.menu_main_public);
-		// change title
-		data = new ArrayList<PublicNews>();
-
-		listGroup = (ViewGroup) findViewById(R.id.listview);
-		StaticTAG.ACTIVITY = this;
-
-		//if (savedInstanceState == null) {
+		// session manager
+		session = new SessionManager(this);
+		if (session.isLoggedIn()) {
+			Intent i = new Intent(this, PrivateMainActivity.class);
+			startActivity(i);
+			finish();
+		} else {
 			Connect connect = new Connect(activity);
-			connect.LoadPublicNews(2, 0);
-		//}
+			connect.LoadPublicNews();
+		}
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.public_main, menu);
 		return true;
 	}
@@ -77,23 +68,13 @@ public class MainActivity extends Activity {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		/*
-		 * if (navDetailsToList()) currentTag =
-		 * StaticTAG.TAG_PUBLIC_NEWS_DETAILS;
-		 */
-	}
-
-	@Override
 	public void onBackPressed() {
 		boolean nav = navDetailsToList();
 		if (nav) {
 			getFragmentManager().popBackStack();
 			getActionBar().setDisplayHomeAsUpEnabled(false);
 			getActionBar().setHomeButtonEnabled(false);
-			getActionBar()
-					.setTitle(getResources().getString(R.string.app_name));
+			getActionBar().setTitle(R.string.app_name);
 		} else
 			super.onBackPressed();
 	}
@@ -102,5 +83,17 @@ public class MainActivity extends Activity {
 		NewsDetailsFragment frag = (NewsDetailsFragment) getFragmentManager()
 				.findFragmentByTag(StaticTAG.TAG_PUBLIC_NEWS_DETAILS);
 		return frag != null && frag.isVisible();
+	}
+
+	public static void Reload() {
+		NewsListFragment fragment = new NewsListFragment();
+		Bundle args = new Bundle();
+		args.putInt(NewsListFragment.KEY_TYPE, NewsListFragment.TYPE_PUBLIC);
+		fragment.setArguments(args);
+
+		activity.getFragmentManager()
+				.beginTransaction()
+				.replace(R.id.listview, fragment,
+						StaticTAG.TAG_PUBLIC_NEWS_LIST).commit();
 	}
 }

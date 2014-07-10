@@ -8,6 +8,7 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -54,8 +55,8 @@ public class PrivateNewsAdapter extends BaseAdapter {
 		title.setText(news.MessageSubject);
 		date.setText(news.CreationDate);
 		shortDetail.setText(Html.fromHtml(news.MessageBody));
-		shortDetail.setMovementMethod(LinkMovementMethod.getInstance());// chua
-																		// test
+		Linkify.addLinks(shortDetail, Linkify.ALL);
+		shortDetail.setMovementMethod(LinkMovementMethod.getInstance());
 		// Set Image
 		// new DownloadImageTask(activity, shortDetail).execute(news.ImageURL);
 		// Set Click Event

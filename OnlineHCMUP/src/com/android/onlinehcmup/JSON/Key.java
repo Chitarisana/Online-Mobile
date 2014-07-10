@@ -2,7 +2,7 @@ package com.android.onlinehcmup.JSON;
 
 public class Key {
 	public static final String KEY_STATUS = "status";
-	public static final String KEY_ERRORS = "_errors";
+	public static final String KEY_ERRORS = "_error";
 	public static final String KEY_DATA = "data";
 	public static final String[] KEY_PUBLIC_NEWS = new String[] {
 			"MessageSubject", "CreationDate", "SenderName", "MessageNote",
@@ -62,28 +62,59 @@ public class Key {
 	public static final String[] KEY_STUDENT_EDIT_CONTACT_3 = new String[] {
 			"SMSAccount1", "SMSAccount2", "Note" };
 	public static final String[] KEY_STUDY_PROGRAMS_INFO = new String[] {
-			"StudyProgramID", "StudyProgramName", "CurriculumID",
-			"CurriculumName", "CurriculumTypeName", "SemesterID",
-			"SemesterName", "Credits" };
-	public static final String KEY_STUDY_PROGRAMS_INFO_CURRICULUMID = "CurriculumID";
-	public static final String KEY_STUDY_PROGRAMS_INFO_SEMESTERID = "SemesterID";
-	public static final String KEY_STUDY_PROGRAMS_INFO_SEMESTERNAME = "SemesterName";
+			"CurriculumID", "CurriculumName", "CurriculumTypeName",
+			"SemesterID", "SemesterName", "Credits", "StudyProgramID",
+			"StudyProgramName" };
+	// public static final String KEY_STUDY_PROGRAMS_INFO_CURRICULUMID =
+	// "CurriculumID";
+	// public static final String KEY_STUDY_PROGRAMS_INFO_SEMESTERID =
+	// "SemesterID";
+	// public static final String KEY_STUDY_PROGRAMS_INFO_SEMESTERNAME =
+	// "SemesterName";
 	public static final String[] KEY_STUDY_PROGRAMS_INFO_VI = new String[] {
-			"Mã chương trình học", "Tên chương trình học", "Mã học phần",
-			"Tên học phần", "Loại học phần", "Mã học kỳ", "Tên học kỳ",
-			"Số tín chỉ" };
+			"Mã học phần", "Tên học phần", "Loại học phần", "Mã học kỳ",
+			"Tên học kỳ", "Số tín chỉ", "Mã chương trình học",
+			"Tên chương trình học" };
 	public static final String[] KEY_REGISTER_SCHEDULE = new String[] {
-			"State", "IsAccepted", "Credits", "Informations", "ProfessorName",
-			"BeginDate", "EndDate", "CurriculumID", "CurriculumName", "TermID",
-			"YearStudy" };
-	public static final String KEY_REGISTER_SCHEDULE_TERM = "TermID";
-	public static final String KEY_REGISTER_SCHEDULE_YEAR_STUDY = "YearStudy";
+	/* "ScheduleStudyUnitAlias", */"CurriculumID", "CurriculumName", "TermID",
+			"YearStudy", "State", "IsAccepted", "Credits", "Informations",
+			"ProfessorName", "BeginDate", "EndDate" };
+	// public static final String KEY_REGISTER_SCHEDULE_TERM = "TermID";
+	// public static final String KEY_REGISTER_SCHEDULE_YEAR_STUDY =
+	// "YearStudy";
 	public static final String[] KEY_REGISTER_SCHEDULE_VI = new String[] {
+	/* "Mã lớp học phần", */"Mã học phần", "Tên học phần", "Học kỳ", "Năm học",
 			"Trạng thái", "Đã chấp nhận", "Tín chỉ", "Thông tin chi tiết",
-			"Tên giảng viên", "Ngày bắt đầu", "Ngày kết thúc", "Mã học phần",
-			"Tên học phần", "Học kỳ", "Năm học" };
+			"Tên giảng viên", "Ngày bắt đầu", "Ngày kết thúc" };
 	public static final String[] KEY_NOT_ACCUMULATE_CURRICULUM = new String[] {
 			"CurriculumID", "CurriculumName", "CurriculumTypeName", "Credits" };
 	public static final String[] KEY_NOT_ACCUMULATE_CURRICULUM_VI = new String[] {
 			"Mã học phần", "Tên học phần", "Loại học phần", "Tín chỉ" };
+	public static final String KEY_CALENDAR = "calendar";
+	public static final String[] KEY_SCHEDULE_CALENDAR = new String[] {
+			"ScheduleStudyUnitID", "CurriculumName", "Information",
+			"DayOfWeek", "RoomID", "StartPeriod", "EndPeriod", "BeginTime",
+			"EndTime", "StartDate", "EndDate", "Week", "YearStudy", "TermID" };
+	public static final String KEY_SCHEDULE_CALENDAR_STARTDATE = "StartDate";
+	public static final String[] KEY_SCHEDULE_EXAMINATION = new String[] {
+			"ScheduleStudyUnitID", "CurriculumID", "CurriculumName", "Day",
+			"Time", "Room", "Address", "Note" };
+	public static final String[] KEY_SCORE = new String[] { "CurriculumID",
+			"CurriculumName", "Credits", "CurriculumTypeName", "Info",
+			"Mark10", "Mark4", "MarkLetter", "IsPass", "TermID", "YearStudy" };
+	public static final String[] KEY_BEHAVIOR_SCORE = new String[] {
+			"YearStudy", "TermID", "LastScore", "BehaviorScoreRank" };
+	public static final String[] KEY_SCORE_SUM = new String[] { "YearStudy",
+			"TermID", "AverageScore", "AverageScore4", "MandatoryCredits",
+			"SelectiveCredits", "RankName" };
+	public static final String[] KEY_TERM_SCORE = new String[] { "TermYearID",
+			"YearStudy", "TermID", "LastScore", "BehaviorScoreRank",
+			"AverageScore", "AverageScore4", "RankName" };
+	public static final String[] KEY_SCORE_DETAILS = new String[] {
+			"StudyUnitID", "AssignmentID", "CurriculumName", "AssignmentName",
+			"FirstMark", "SecondMark" };
+	public static final String[] KEY_TERM_YEAR = new String[] { "YearStudy",
+			"TermID" };
+	public static final String[] KEY_SEMESTER = new String[] { "SemesterID",
+			"SemesterName" };
 }

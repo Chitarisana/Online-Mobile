@@ -2,12 +2,7 @@ package com.android.onlinehcmup;
 
 import java.util.HashMap;
 
-import com.android.onlinehcmup.JSON.Connect;
-import com.android.onlinehcmup.Support.SessionManager;
-import com.android.onlinehcmup.Support.StaticTAG;
-
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.onlinehcmup.JSON.Connect;
+import com.android.onlinehcmup.Support.SessionManager;
+
 public class StudentChangePasswordFragment extends BaseFragment {
-	public SessionManager session;
-	public static EditText oldPass;
-	public static EditText newPass;
-	public static EditText reNewPass;
 
 	public StudentChangePasswordFragment() {
 	}
@@ -27,28 +21,22 @@ public class StudentChangePasswordFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		session = new SessionManager(getActivity().getApplicationContext());
+		final SessionManager session = new SessionManager(getActivity());
 		session.checkLogin();
-		getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActivity().getActionBar().setTitle(
-				getActivity().getResources().getString(
-						R.string.student_change_password_title));
-		PrivateMainActivity.menuToggle.setDrawerIndicatorEnabled(false);
-		PrivateMainActivity.mainLayout
-				.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-		setHasOptionsMenu(true);
+		setOnFragment(getString(R.string.student_change_password_title));
+
 		View view = inflater.inflate(R.layout.fragment_change_password,
 				container, false);
 
-		oldPass = (EditText) view.findViewById(R.id.txtOld);
-		newPass = (EditText) view.findViewById(R.id.txtNew);
-		reNewPass = (EditText) view.findViewById(R.id.txtReNew);
+		final EditText oldPass = (EditText) view.findViewById(R.id.txtOld);
+		final EditText newPass = (EditText) view.findViewById(R.id.txtNew);
+		final EditText reNewPass = (EditText) view.findViewById(R.id.txtReNew);
+
 		Button btnOK = (Button) view.findViewById(R.id.btnOK);
 		btnOK.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
-				// if disconnect ==> fail, return
 				if (isEmpty(oldPass) || isEmpty(newPass) || isEmpty(reNewPass)) {
 					Toast.makeText(getActivity(),
 							R.string.edit_password_noti_null,
@@ -57,21 +45,21 @@ public class StudentChangePasswordFragment extends BaseFragment {
 				}
 				if (!newPass.getText().toString().trim()
 						.matches(reNewPass.getText().toString().trim())) {
-					Toast.makeText(
-							getActivity(),
-							getActivity().getResources().getString(
-									R.string.edit_password_noti_dismatch),
+					Toast.makeText(getActivity(),
+							R.string.edit_password_noti_dismatch,
 							Toast.LENGTH_SHORT).show();
 					return;
 				}
-				session = new SessionManager(StaticTAG.ACTIVITY);
+
 				HashMap<String, String> user = session.getUserDetails();
 				String studentID = user.get(SessionManager.KEY_STUDENTID);
-				Connect connect = new Connect(getActivity());				
-				connect.ChangePassword(studentID, oldPass.getText().toString().trim(), newPass.getText().toString().trim());				
+				Connect connect = new Connect(getActivity());
+				connect.ChangePassword(studentID, oldPass.getText().toString()
+						.trim(), newPass.getText().toString().trim());
 				getActivity().onBackPressed();
 			}
 		});
+
 		Button btnCancel = (Button) view.findViewById(R.id.btnCancel);
 		btnCancel.setOnClickListener(new View.OnClickListener() {
 

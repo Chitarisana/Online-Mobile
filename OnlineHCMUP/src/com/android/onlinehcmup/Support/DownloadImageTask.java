@@ -61,6 +61,5 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		if (imageView != null)
 			imageView.setImageDrawable(drawable);
 		// save image to Local Database
-		// co nen save PublicNews???
 	}
 }

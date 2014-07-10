@@ -15,7 +15,6 @@
         android:gravity="center_vertical"
         android:paddingBottom="10dp"
         android:paddingLeft="15dp"
-        android:paddingRight="15dp"
         android:paddingTop="10dp"
         android:textColor="#0c4775"
         android:typeface="serif" />
@@ -27,10 +26,8 @@
         android:layout_alignParentRight="true"
         android:gravity="center_vertical|right"
         android:paddingBottom="10dp"
-        android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:paddingTop="10dp"
-        android:singleLine="false"
         android:textColor="#5fb6fa"
         android:typeface="serif" />
 

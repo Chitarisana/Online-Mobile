@@ -6,15 +6,12 @@ import java.util.HashMap;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
@@ -27,17 +24,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.onlinehcmup.Adapter.KeyValueAdapter;
 import com.android.onlinehcmup.JSON.Connect;
 import com.android.onlinehcmup.Model.Curriculum;
 import com.android.onlinehcmup.Model.JSONType;
-import com.android.onlinehcmup.Model.RegisterScheduleStudyUnit;
+import com.android.onlinehcmup.Model.RegisteredStudyUnit;
 import com.android.onlinehcmup.Model.TermStudy;
 import com.android.onlinehcmup.Support.SessionManager;
 import com.android.onlinehcmup.Support.StaticTAG;
 
 public class RegisterCurriculumFragment extends BaseFragment {
 	static Activity activity;
-	public SessionManager session;
+	SessionManager session;
 	static String studentID, studentName;
 	String[] tag = new String[] { StaticTAG.TAG_REGISTER_CURRICULUM_RESULT,
 			StaticTAG.TAG_REGISTER_CURRICULUM_DISACCUMULATED,
@@ -50,17 +48,16 @@ public class RegisterCurriculumFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		activity = getActivity();
-		session = new SessionManager(activity.getApplicationContext());
+		session = new SessionManager(activity);
 		session.checkLogin();
 		activity.getActionBar().setDisplayHomeAsUpEnabled(true);
-		activity.getActionBar().setTitle(
-				activity.getResources().getString(R.string.menu_3));
+		setTitle(R.string.menu_3);
 
 		View row = inflater.inflate(R.layout.fragment_register_curriculum,
 				container, false);
 
 		HashMap<String, String> user = session.getUserDetails();
-		studentID = user.get(SessionManager.KEY_STUDENTID);
+		studentID = user.get(SessionManager.KEY_STUDENT_ID);
 		studentName = user.get(SessionManager.KEY_STUDENT_NAME);
 
 		Button btnResult = (Button) row.findViewById(R.id.btnResult);
@@ -77,7 +74,7 @@ public class RegisterCurriculumFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				Fragment frag = new DisaccumulatedFragment();
+				Fragment frag = new NotAccumulatedFragment();
 				setHandlerButton(frag, tag[1]);
 			}
 		});
@@ -100,7 +97,7 @@ public class RegisterCurriculumFragment extends BaseFragment {
 
 	public static class ResultFragment extends BaseFragment {
 		public static LinearLayout termLayout;
-		public static TermStudy[] TermStudies;
+		public static ArrayList<TermStudy> TermStudies;
 
 		@Override
 		public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -128,27 +125,25 @@ public class RegisterCurriculumFragment extends BaseFragment {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			activity.getActionBar().setDisplayHomeAsUpEnabled(true);
-			activity.getActionBar().setTitle(
-					activity.getResources().getString(
-							R.string.register_curriculum_result_registered));
-			PrivateMainActivity.menuToggle.setDrawerIndicatorEnabled(false);
-			PrivateMainActivity.mainLayout
-					.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-			setHasOptionsMenu(true);
+			setOnFragment(R.string.register_curriculum_result_registered);
 
 			View row = inflater.inflate(R.layout.fragment_study_program,
 					container, false);
-			TextView studentID = (TextView) row.findViewById(R.id.studentID);
-			TextView studentName = (TextView) row
-					.findViewById(R.id.studentName);
+			TextView stdID = (TextView) row.findViewById(R.id.studentID);
+			TextView stdName = (TextView) row.findViewById(R.id.studentName);
 
-			studentID.setText(RegisterCurriculumFragment.studentID);
-			studentName.setText(RegisterCurriculumFragment.studentName);
+			// test
+			if (studentID == null) {
+				Toast.makeText(activity, "studentID null", Toast.LENGTH_SHORT)
+						.show();
+			}
+			stdID.setText(studentID);
+			stdName.setText(studentName);
 			termLayout = (LinearLayout) row.findViewById(R.id.term_layout);
 
 			Connect connect = new Connect(activity);
-			connect.LoadRegisterResultAll(RegisterCurriculumFragment.studentID);
+			PrivateMainActivity.currentTask = connect
+					.LoadRegisterResultAll(studentID);
 
 			return row;
 		}
@@ -170,7 +165,7 @@ public class RegisterCurriculumFragment extends BaseFragment {
 
 			@Override
 			public int getCount() {
-				return TermStudies.length;
+				return TermStudies.size();
 			}
 
 			@Override
@@ -190,15 +185,22 @@ public class RegisterCurriculumFragment extends BaseFragment {
 						R.layout.fragment_study_program_term, null);
 
 				TextView title = (TextView) row.findViewById(R.id.title);
-				title.setText(TermStudies[position].getHeader());
+				title.setText(TermStudies.get(position).getHeader());
 				RelativeLayout header = (RelativeLayout) row
 						.findViewById(R.id.header);
 				header.setBackgroundColor(activity.getResources().getColor(
 						R.color.titleRegisterColor));
 				LinearLayout list = (LinearLayout) row
 						.findViewById(R.id.content);
-				ResultDetailsAdapter ad = new ResultDetailsAdapter(
-						TermStudies[position].StudyUnit);
+				ArrayList<JSONType> data = new ArrayList<JSONType>();
+				ArrayList<RegisteredStudyUnit> studyUnits = TermStudies
+						.get(position).StudyUnit;
+				for (int i = 0; i < studyUnits.size(); i++) {
+					data.add(new JSONType(studyUnits.get(i).CurriculumName,
+							studyUnits.get(i).Credits + ""));
+				}
+				KeyValueAdapter ad = new KeyValueAdapter(activity, data,
+						R.layout.row_study_program_term_details, false);
 
 				final int adapterCount = ad.getCount();
 				list.removeAllViews();
@@ -208,56 +210,11 @@ public class RegisterCurriculumFragment extends BaseFragment {
 				}
 				return row;
 			}
-
-			public class ResultDetailsAdapter extends BaseAdapter {
-
-				public ArrayList<RegisterScheduleStudyUnit> data;
-
-				public ResultDetailsAdapter(
-						ArrayList<RegisterScheduleStudyUnit> d) {
-					data = d;
-				}
-
-				@Override
-				public int getCount() {
-					return data.size();
-				}
-
-				@Override
-				public Object getItem(int position) {
-					return position;
-				}
-
-				@Override
-				public long getItemId(int position) {
-					return position;
-				}
-
-				@Override
-				public View getView(final int position, View convertView,
-						ViewGroup parent) {
-					View row = (activity.getLayoutInflater()).inflate(
-							R.layout.row_study_program_term_details, null);
-					TextView key = (TextView) row.findViewById(R.id.key);
-					TextView value = (TextView) row.findViewById(R.id.value);
-
-					key.setText(data.get(position).CurriculumName);
-					value.setText(data.get(position).Credits + "");
-					DisplayMetrics displaymetrics = new DisplayMetrics();
-					activity.getWindowManager().getDefaultDisplay()
-							.getMetrics(displaymetrics);
-					int padding = (int) (displaymetrics.widthPixels * 0.2);
-					key.setWidth(displaymetrics.widthPixels - padding
-							- value.getWidth());
-					return row;
-				}
-			}
 		}
 	}
 
 	public static class ResultCurrentFragment extends BaseFragment {
-		public static String currentTermID;
-		public static String currentYearStudy;
+		public static TermStudy current;
 		static ListView list, details;
 
 		@Override
@@ -281,22 +238,19 @@ public class RegisterCurriculumFragment extends BaseFragment {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			activity.getActionBar().setDisplayHomeAsUpEnabled(true);
-			activity.getActionBar().setTitle(
-					activity.getResources().getString(
-							R.string.register_curriculum_result_current));
-			PrivateMainActivity.menuToggle.setDrawerIndicatorEnabled(false);
-			PrivateMainActivity.mainLayout
-					.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-			setHasOptionsMenu(true);
+			setOnFragment(R.string.register_curriculum_result_current);
 
 			View row = inflater.inflate(R.layout.fragment_registered_current,
 					container, false);
-			TextView studentName = (TextView) row
-					.findViewById(R.id.studentName);
-			studentName.setText(RegisterCurriculumFragment.studentName);
-			TextView studentID = (TextView) row.findViewById(R.id.studentID);
-			studentID.setText(RegisterCurriculumFragment.studentID);
+			// test
+			if (studentName == null)
+				Toast.makeText(activity, "student name null",
+						Toast.LENGTH_SHORT).show();
+			TextView stdName = (TextView) row.findViewById(R.id.studentName);
+			stdName.setText(studentName);
+			TextView stdID = (TextView) row.findViewById(R.id.studentID);
+			stdID.setText(studentID);
+
 			details = (ListView) row.findViewById(R.id.details);
 			list = (ListView) row.findViewById(R.id.content);
 
@@ -304,24 +258,18 @@ public class RegisterCurriculumFragment extends BaseFragment {
 			activity.getWindowManager().getDefaultDisplay()
 					.getMetrics(displaymetrics);
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-					LayoutParams.MATCH_PARENT, displaymetrics.widthPixels / 5);
+					LayoutParams.MATCH_PARENT,
+					(int) (displaymetrics.heightPixels / 5));
+
 			list.setLayoutParams(params);
 
 			Connect connect = new Connect(activity);
-			connect.LoadRegisterResultCurrent();
+			PrivateMainActivity.currentTask = connect
+					.LoadRegisterResultCurrent();
 			return row;
 		}
 
 		public static void LoadFragment() {
-			Log.d(currentTermID, currentYearStudy);
-			final TermStudy current = getCurrentTermYear(
-					ResultFragment.TermStudies, currentTermID, currentYearStudy);
-			if (current == null) {
-				Toast.makeText(activity,
-						activity.getResources().getString(R.string.noti_null),
-						Toast.LENGTH_SHORT).show();
-				return;
-			}
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity,
 					R.layout.row_registered_current, R.id.curriName,
 					getCurrisName(current));
@@ -342,18 +290,11 @@ public class RegisterCurriculumFragment extends BaseFragment {
 							.get(position).Informations));
 					data.add(new JSONType("Giảng viên", current.StudyUnit
 							.get(position).ProfessorName));
-					details.setAdapter(new RegisteredCurrentDetailsAdapter(data));
+					KeyValueAdapter adapter = new KeyValueAdapter(activity,
+							data, R.layout.row_study_program_term_details, null);
+					details.setAdapter(adapter);
 				}
 			});
-		}
-
-		protected static TermStudy getCurrentTermYear(TermStudy[] list,
-				String termID, String year) {
-			for (int i = 0; i < list.length; i++)
-				if (list[i].TermID.matches(termID)
-						&& list[i].YearStudy.matches(year))
-					return list[i];
-			return null;
 		}
 
 		protected static ArrayList<String> getCurrisName(TermStudy target) {
@@ -362,80 +303,26 @@ public class RegisterCurriculumFragment extends BaseFragment {
 				list.add(target.StudyUnit.get(i).CurriculumName);
 			return list;
 		}
-
-		public static class RegisteredCurrentDetailsAdapter extends BaseAdapter {
-			private ArrayList<JSONType> data;
-
-			public RegisteredCurrentDetailsAdapter(ArrayList<JSONType> d) {
-				data = d;
-			}
-
-			@Override
-			public int getCount() {
-				return data.size();
-			}
-
-			@Override
-			public Object getItem(int position) {
-				return position;
-			}
-
-			@Override
-			public long getItemId(int position) {
-				return position;
-			}
-
-			@Override
-			public View getView(final int position, View convertView,
-					ViewGroup parent) {
-				View row = (activity.getLayoutInflater()).inflate(
-						R.layout.row_study_program_term_details, null);
-				TextView key = (TextView) row.findViewById(R.id.key);
-				TextView value = (TextView) row.findViewById(R.id.value);
-
-				key.setText(data.get(position).key);
-				value.setText(data.get(position).value);
-
-				DisplayMetrics displaymetrics = new DisplayMetrics();
-				activity.getWindowManager().getDefaultDisplay()
-						.getMetrics(displaymetrics);
-				key.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
-				value.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
-
-				int padding = (int) (displaymetrics.widthPixels * 0.2);
-				value.setWidth(displaymetrics.widthPixels - padding
-						- key.getMeasuredWidth());
-				return row;
-			}
-		}
 	}
 
-	public static class DisaccumulatedFragment extends BaseFragment {
+	public static class NotAccumulatedFragment extends BaseFragment {
 		public static ArrayList<Curriculum> curris;
-		public static LinearLayout content;
-		public static LinearLayout termLayout;
-		public static View subView;
+		public static LinearLayout content, termLayout;
+		static View subView;
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			activity.getActionBar().setDisplayHomeAsUpEnabled(true);
-			activity.getActionBar().setTitle(
-					activity.getResources().getString(
-							R.string.register_curriculum_disaccumulate));
-			PrivateMainActivity.menuToggle.setDrawerIndicatorEnabled(false);
-			PrivateMainActivity.mainLayout
-					.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-			setHasOptionsMenu(true);
+			setOnFragment(R.string.register_curriculum_disaccumulate);
 
 			View row = inflater.inflate(R.layout.fragment_study_program,
 					container, false);
-			TextView studentID = (TextView) row.findViewById(R.id.studentID);
-			TextView studentName = (TextView) row
-					.findViewById(R.id.studentName);
+			TextView stdentID = (TextView) row.findViewById(R.id.studentID);
+			TextView stdentName = (TextView) row.findViewById(R.id.studentName);
 
-			studentID.setText(RegisterCurriculumFragment.studentID);
-			studentName.setText(RegisterCurriculumFragment.studentName);
+			stdentID.setText(studentID);
+			stdentName.setText(studentName);
+
 			termLayout = (LinearLayout) row.findViewById(R.id.term_layout);
 			curris = new ArrayList<Curriculum>();
 
@@ -449,16 +336,24 @@ public class RegisterCurriculumFragment extends BaseFragment {
 			header.setBackgroundColor(activity.getResources().getColor(
 					R.color.titleDisaccColor));
 			content = (LinearLayout) subView.findViewById(R.id.content);
+			SessionManager session = new SessionManager(activity);
 			Connect connect = new Connect(activity);
-
-			String stdID = RegisterCurriculumFragment.studentID;
-			String studyProgram = stdID.substring(0, 3) + stdID.substring(4, 7);
-			connect.LoadRegisterNotAccumulate(stdID, studyProgram);
+			PrivateMainActivity.currentTask = connect
+					.LoadRegisterNotAccumulate(studentID,
+							session.getStudyProgram());
 			return row;
 		}
 
 		public static void LoadFragment() {
-			DisaccumulatedAdapter adapter = new DisaccumulatedAdapter();
+			if (curris == null)
+				return;
+			ArrayList<JSONType> data = new ArrayList<JSONType>();
+			for (int i = 0; i < curris.size(); i++) {
+				data.add(new JSONType(curris.get(i).CurriculumName, curris
+						.get(i).Credits + ""));
+			}
+			KeyValueAdapter adapter = new KeyValueAdapter(activity, data,
+					R.layout.row_study_program_term_details, false);
 			final int adapterCount = adapter.getCount();
 			content.removeAllViews();
 			for (int i = 0; i < adapterCount; i++) {
@@ -466,46 +361,6 @@ public class RegisterCurriculumFragment extends BaseFragment {
 				content.addView(item);
 			}
 			termLayout.addView(subView);
-		}
-
-		public static class DisaccumulatedAdapter extends BaseAdapter {
-
-			public DisaccumulatedAdapter() {
-			}
-
-			@Override
-			public int getCount() {
-				return curris.size();
-			}
-
-			@Override
-			public Object getItem(int position) {
-				return position;
-			}
-
-			@Override
-			public long getItemId(int position) {
-				return position;
-			}
-
-			@Override
-			public View getView(final int position, View convertView,
-					ViewGroup parent) {
-				View row = (activity.getLayoutInflater()).inflate(
-						R.layout.row_study_program_term_details, null);
-				TextView key = (TextView) row.findViewById(R.id.key);
-				TextView value = (TextView) row.findViewById(R.id.value);
-
-				key.setText(curris.get(position).CurriculumName);
-				value.setText(curris.get(position).Credit + "");
-				DisplayMetrics displaymetrics = new DisplayMetrics();
-				activity.getWindowManager().getDefaultDisplay()
-						.getMetrics(displaymetrics);
-				int padding = (int) (displaymetrics.widthPixels * 0.2);
-				key.setWidth(displaymetrics.widthPixels - padding
-						- value.getWidth());
-				return row;
-			}
 		}
 	}
 

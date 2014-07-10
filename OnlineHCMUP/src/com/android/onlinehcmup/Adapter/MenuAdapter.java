@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -14,14 +13,16 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.android.onlinehcmup.MarkFragment;
 import com.android.onlinehcmup.PrivateNewsFragment;
 import com.android.onlinehcmup.R;
 import com.android.onlinehcmup.RegisterCurriculumFragment;
 import com.android.onlinehcmup.ScheduleFragment;
+import com.android.onlinehcmup.ScheduleFragment.ExaminationFragment;
+import com.android.onlinehcmup.ScoreFragment;
 import com.android.onlinehcmup.StudentInfoFragment;
 import com.android.onlinehcmup.StudyProgramFragment;
 import com.android.onlinehcmup.Model.SliderMenu;
+import com.android.onlinehcmup.Support.DialogManager;
 import com.android.onlinehcmup.Support.SessionManager;
 import com.android.onlinehcmup.Support.StaticTAG;
 
@@ -40,7 +41,7 @@ public class MenuAdapter extends BaseAdapter {
 		menu = m;
 		mainLayout = mL;
 		menuLV = mLV;
-		session = new SessionManager(activity.getApplicationContext());
+		session = new SessionManager(activity);
 	}
 
 	@Override
@@ -74,10 +75,13 @@ public class MenuAdapter extends BaseAdapter {
 			public void onClick(View v) {
 				// check login
 				session.checkLogin();
-
-				Log.w("position", position + "");
 				menuLV.setItemChecked(position, true);
 				mainLayout.closeDrawer(menuLV);
+				/*
+				 * if(PrivateMainActivity.currentTask!=null)
+				 * if(!PrivateMainActivity.currentTask.isCancelled())
+				 * PrivateMainActivity.currentTask.cancel(true);
+				 */
 
 				switch (position) {
 				case 0: // Main --> PrivateNewsFragment
@@ -103,37 +107,35 @@ public class MenuAdapter extends BaseAdapter {
 					openFragment(new ScheduleFragment(),
 							StaticTAG.TAG_SCHEDULE, activity.getResources()
 									.getString(R.string.menu_4_1));
-					ScheduleFragment.schedulePosition=4;
+					// ScheduleFragment.schedulePosition = 4;
 					break;
-				case 5: // Mark --> MarkFragment
-					openFragment(new MarkFragment(),
-							StaticTAG.TAG_MARK, activity.getResources()
+				case 5: // ExaminationFragment
+					openFragment(new ExaminationFragment(),
+							StaticTAG.TAG_SCHEDULE_EXAMINATE, activity
+									.getResources()
+									.getString(R.string.menu_4_2));
+					break;
+				case 6: // Mark --> MarkFragment
+					openFragment(new ScoreFragment(), StaticTAG.TAG_MARK,
+							activity.getResources()
 									.getString(R.string.menu_5_1));
-					MarkFragment.markPosition=5;
-					break;
-				case 6:
+					// MarkFragment.markPosition = 5;
 					break;
 				case 7:
 					break;
 				case 8:
 					break;
-				case 9:
+				case 9: // Sign out
+					DialogManager.showYesNoDialog(
+							activity,
+							activity.getResources().getString(
+									R.string.logout_noti_title),
+							activity.getResources().getString(
+									R.string.logout_noti_detail),
+							activity.getResources().getString(R.string.btn_ok),
+							activity.getResources().getString(
+									R.string.logout_noti_negative), true);
 					break;
-				case 10:
-					break;
-				case 11: // Thoát
-					activity.onBackPressed();
-
-					// Logout
-					// session.logoutUser();
-
-					// return to main page
-					// Intent i = new Intent(activity.getApplicationContext(),
-					// MainActivity.class);
-					// activity.startActivity(i);
-					// activity.finish();
-					break;
-				default:
 				}
 			}
 		});

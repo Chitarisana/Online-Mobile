@@ -1,9 +1,6 @@
 package com.android.onlinehcmup.Support;
 
-import android.app.Activity;
-
 public class StaticTAG {
-	public static Activity ACTIVITY;
 	public static String TAG_PUBLIC_NEWS_LIST = "PUBLIC_NEWS_LIST_FRAGMENT";
 	public static String TAG_PUBLIC_NEWS_DETAILS = "PUBLIC_NEWS_DETAILS_FRAGMENT";
 	public static String TAG_PRIVATE_NEWS_LIST = "PRIVATE_NEWS_LIST_FRAGMENT";

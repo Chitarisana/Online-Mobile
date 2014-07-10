@@ -7,27 +7,24 @@ public class TermStudy {
 	public String TermID; // HK1, HK2
 	public String TermName;
 	public Double CreditNum;
-	public ArrayList<RegisterScheduleStudyUnit> StudyUnit;
+	public ArrayList<RegisteredStudyUnit> StudyUnit;
 
 	public TermStudy() {
 	}
 
-	public TermStudy(String y, String t, Double c,
-			ArrayList<RegisterScheduleStudyUnit> std) {
+	public TermStudy(String y, String t, ArrayList<RegisteredStudyUnit> std) {
 		YearStudy = y;
 		TermID = t;
-		CreditNum = c;
-		TermName = getName(t, y);
+		TermName = getName(y, t);
 		StudyUnit = std;
 	}
 
-	private String getName(String t, String y) {
-		String num = t.substring(t.length() - 1, t.length());
-		return "HK " + num + ", " + y;
+	private String getName(String y, String t) {
+		return t + ", " + y;
 	}
 
 	public TermStudy(String y, String t) {
-		this(y, t, null, new ArrayList<RegisterScheduleStudyUnit>());
+		this(y, t, new ArrayList<RegisteredStudyUnit>());
 	}
 
 	public int getCreditNum() {
@@ -38,8 +35,6 @@ public class TermStudy {
 	}
 
 	public String getHeader() {
-		String str = TermName;
-		str += " (" + (int)getCreditNum() + " tc)";
-		return str;
-	}	
+		return TermName + " (" + (int) getCreditNum() + " tc)";
+	}
 }

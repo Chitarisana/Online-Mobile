@@ -149,7 +149,7 @@ public class MarkFragment extends BaseFragment {
 				ArrayList<JSONType> data = new ArrayList<JSONType>();
 				data.add(new JSONType("Điểm",
 						curris.get(position).CurriculumName));
-				data.add(new JSONType("Điểm chữ", curris.get(position).Credit
+				data.add(new JSONType("Điểm chữ", curris.get(position).Credits
 						+ ""));
 				data.add(new JSONType("Kết quả", "Đậu"));
 				details.setAdapter(new ExaminateDetailsAdapter(data));

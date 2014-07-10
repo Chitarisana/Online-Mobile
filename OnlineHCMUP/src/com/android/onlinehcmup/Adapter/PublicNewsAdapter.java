@@ -8,6 +8,7 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -54,6 +55,8 @@ public class PublicNewsAdapter extends BaseAdapter {
 		title.setText(news.MessageSubject);
 		date.setText(news.CreationDate);
 		shortDetail.setText(Html.fromHtml(news.MessageNote));
+		 
+		Linkify.addLinks(shortDetail, Linkify.ALL);
 		shortDetail.setMovementMethod(LinkMovementMethod.getInstance());
 		// Set Click Event
 		row.setOnClickListener(new OnClickListener() {
